@@ -98,21 +98,53 @@ for (let i = 0; i < ops.length; i += 1) {
       if (!found) throw new Error(`Node not found: ${op.id}`);
       if (!op.newId) throw new Error('copy.newId is required');
       if (ids.has(op.newId)) throw new Error(`Duplicate id: ${op.newId}`);
-      const target = findNodeById(pen, op.toParentId);
+      const target = op.toParentId === 'root' ? { node: pen } : findNodeById(pen, op.toParentId);
       if (!target) throw new Error(`Target parent not found: ${op.toParentId}`);
       ensureChildrenArray(target.node, `target parent ${op.toParentId}`);
 
       const copied = clone(found.node);
+      const oldRootId = copied.id;
       copied.id = op.newId;
-      const copiedIds = collectIds({ children: [copied] });
-      for (const cid of copiedIds) {
-        if (cid !== op.newId && ids.has(cid)) {
-          throw new Error(`Copy would duplicate descendant id: ${cid}`);
+
+      // Auto-prefix descendant IDs to avoid duplicates
+      function prefixDescendantIds(node, prefix) {
+        if (node.children) {
+          for (const child of node.children) {
+            if (child.id) {
+              child.id = `${prefix}/${child.id}`;
+            }
+            prefixDescendantIds(child, prefix);
+          }
+        }
+        // Update ref references within the copy
+        if (node.ref && !node.ref.startsWith('$')) {
+          const refTarget = found.node.children?.some(c => c.id === node.ref);
+          if (refTarget) {
+            node.ref = `${prefix}/${node.ref}`;
+          }
+        }
+        // Update descendants overrides
+        if (node.descendants) {
+          const newDescendants = {};
+          for (const [key, val] of Object.entries(node.descendants)) {
+            newDescendants[`${prefix}/${key}`] = val;
+          }
+          node.descendants = newDescendants;
         }
       }
+      prefixDescendantIds(copied, op.newId);
+
+      // Verify no duplicates
+      const copiedIds = collectIds({ children: [copied] });
+      for (const cid of copiedIds) {
+        if (ids.has(cid)) {
+          throw new Error(`Copy would duplicate id: ${cid}`);
+        }
+      }
+
       const idx = normalizeIndex(op.index, target.node.children.length);
       target.node.children.splice(idx, 0, copied);
-      ids.add(op.newId);
+      for (const cid of copiedIds) ids.add(cid);
       changed += 1;
     } else {
       throw new Error(`Unsupported op: ${op.op}`);

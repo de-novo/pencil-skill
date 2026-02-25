@@ -209,6 +209,17 @@ For logos, images, and icons:
 - [ ] When using slot, confirm `slot` declaration, `name` frame, and `ref.children` injection relationship
 - [ ] Check theme axis/value consistency when needed
 
+## Property Aliases
+Both singular and plural forms are accepted for these properties:
+- `fill` / `fills` — node fill(s)
+- `stroke` / `strokes` — node stroke(s)
+- `effect` / `effects` — node effect(s)
+
+Use singular for single values, plural for arrays. Both forms are valid in the schema.
+
+## AGENTS.md (Compiled Rules)
+`AGENTS.md` contains all 41 design rules compiled from `rules/*.md`. When this skill is loaded by an agent system, AGENTS.md provides the complete rule reference. To regenerate after editing rules: `node scripts/compile-agents.mjs`
+
 ## CLI Tools
 
 These scripts manipulate `.pen` files directly. They work without MCP.
@@ -429,3 +440,4 @@ Compiled full-rule version: `AGENTS.md`
 
 ### Examples
 - [example-card.pen](assets/example-card.pen): Complete .pen file example
+- [reddit-ui.pen](assets/reddit-ui.pen): Reddit-style 3-column UI layout with reusable components
