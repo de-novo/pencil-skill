@@ -224,7 +224,7 @@ These scripts manipulate `.pen` files directly. They work without MCP.
 ### Write Tools
 | Script | Purpose | Usage |
 |--------|------|--------|
-| `batch-design.mjs` | Insert/update/delete/move/copy nodes | `node scripts/batch-design.mjs file.pen --ops '[...]'` |
+| `batch-design.mjs` | Insert/update/delete/move/copy nodes | `node scripts/batch-design.mjs file.pen --ops '[{"op":"update","id":"node1","props":{"name":"Header"}}]'` |
 | `replace-props.mjs` | Bulk property replacement | `node scripts/replace-props.mjs file.pen --match '{"fill":"#FF0000"}' --replace '{"fill":"$color.primary"}'` |
 | `set-variables.mjs` | Add/update variables | `node scripts/set-variables.mjs file.pen --var 'name=type:value'` |
 

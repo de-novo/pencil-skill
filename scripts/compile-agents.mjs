@@ -2,6 +2,13 @@
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+if (process.argv.includes('--help')) {
+  console.log('Usage: node scripts/compile-agents.mjs');
+  console.log('');
+  console.log('Compiles all rules/*.md files into AGENTS.md.');
+  process.exit(0);
+}
+
 const rulesDir = join(import.meta.dirname, '..', 'rules');
 const outFile = join(import.meta.dirname, '..', 'AGENTS.md');
 

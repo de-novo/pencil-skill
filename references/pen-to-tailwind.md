@@ -6,7 +6,7 @@ Use this when converting `.pen` designs into React/Tailwind code.
 
 | .pen Node | HTML/React |
 |-----------|------------|
-| `frame` (layout) | `<div className="flex ...">` |
+| `frame` (layout) | `<div className="flex gap-4 p-6">` |
 | `text` | `<p>`, `<h1-6>`, `<span>` |
 | `rectangle` | `<div>` with background |
 | `ellipse` | `<div className="rounded-full">` |

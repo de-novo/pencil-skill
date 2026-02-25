@@ -1,4 +1,4 @@
-// Auto-generated from pen-schema.json — do not edit directly
+// TypeScript definitions for .pen format (derived from pen-schema.json)
 
 export type PenNodeType =
   | 'rectangle'

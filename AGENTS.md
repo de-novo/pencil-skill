@@ -2987,7 +2987,7 @@ After completing the design, you must pass the checklist below. If any item fail
 
 ### 📐 Layout & Spacing
 
-- [ ] Does every container frame include a `layout` property? (`"none"` prohibited)
+- [ ] Does every container frame include a `layout` property? (`"none"` prohibited except for overlay/badge/modal containers per z-order rule)
 - [ ] Are there no empty frame spacers?
 - [ ] Are all gap/padding values multiples of 4?
 - [ ] Is `textGrowth` specified on text nodes?
