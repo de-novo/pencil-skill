@@ -49,7 +49,6 @@ After completing the design, it must pass the checklist below. If even one item 
 - [ ] Are all values referenced by tokens (`$`)?
 - [ ] Does it meet WCAG AA contrast ratio (4.5:1 or higher)?
 
-
 <!-- source: rules/aesthetic-color.md -->
 
 ---
@@ -67,7 +66,7 @@ tags: aesthetic,color,palette,anti-ai,gradient
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 ```json
@@ -97,7 +96,7 @@ pencil set-variables --file tokens.json
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 - Brand-specific teal tones — not Tailwind defaults
@@ -185,7 +184,6 @@ pencil set-variables --file tokens.json
   }
 }
 ```
-
 <!-- source: rules/aesthetic-content.md -->
 
 ---
@@ -342,7 +340,6 @@ tags: aesthetic,content,copywriting,lorem-ipsum,anti-ai
 }
 ```
 
-
 <!-- source: rules/aesthetic-decoration.md -->
 
 ---
@@ -439,7 +436,6 @@ Blurred gradient blobs in the background, `lg shadow` on every card, and meaning
   ]
 }
 ```
-
 
 <!-- source: rules/aesthetic-layout.md -->
 
@@ -596,7 +592,6 @@ The pattern of centering all elements and repeating three rows of cards with equ
 }
 ```
 
-
 <!-- source: rules/aesthetic-typography.md -->
 
 ---
@@ -712,7 +707,6 @@ It is a typical AI pattern to use Inter in all text and vary only the fontSize. 
 }
 ```
 
-
 <!-- source: rules/color-accessibility.md -->
 
 ---
@@ -792,7 +786,6 @@ Plain text requires a contrast ratio of **4.5:1 or higher** compared to the back
 }
 ```
 
-
 <!-- source: rules/color-dark-mode.md -->
 
 ---
@@ -810,7 +803,7 @@ In dark mode, it is prohibited to use `#000000` for background and `#FFFFFF` for
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 ```json
@@ -881,7 +874,7 @@ pencil set-variables --file tokens.json
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 - light=warm white, dark=deep navy
@@ -986,7 +979,6 @@ pencil set-variables --file tokens.json
   }
 }
 ```
-
 
 <!-- source: rules/color-ratio.md -->
 
@@ -1094,7 +1086,6 @@ Color distribution follows the 60-30-10 ratio. 60% neutral (background, surface)
   ]
 }
 ```
-
 
 <!-- source: rules/color-semantic.md -->
 
@@ -1304,7 +1295,6 @@ The color system is designed in three layers. ① Primitive (primary color palet
 ]
 ```
 
-
 <!-- source: rules/component-atomic.md -->
 
 ---
@@ -1478,7 +1468,6 @@ Components must be combined in the following hierarchy: Atom → Molecule → Or
 ]
 ```
 
-
 <!-- source: rules/component-naming.md -->
 
 ---
@@ -1593,7 +1582,6 @@ Schema validation will fail if `id` contains a slash (`/`). Camel case, undersco
 ]
 ```
 
-
 <!-- source: rules/component-reuse-first.md -->
 
 ---
@@ -1640,7 +1628,7 @@ Create new button directly without search-nodes
 Step 1: First, search for existing reusables (run CLI search-nodes)
 
 ```bash
-search-nodes --query "button" --reusable
+node scripts/search-nodes.mjs design.pen --name "button" --reusable
 ```
 
 Step 2: Search result: `btn-primary` → Create instance with `ref`
@@ -1659,8 +1647,6 @@ Step 2: Search result: `btn-primary` → Create instance with `ref`
   }
 ]
 ```
-
-
 <!-- source: rules/component-slot.md -->
 
 ---
@@ -1797,7 +1783,6 @@ Components whose content changes (cards, modals, list items, etc.) must declare 
 ]
 ```
 
-
 <!-- source: rules/component-variant.md -->
 
 ---
@@ -1930,7 +1915,6 @@ Variants with different styles, such as Primary/Secondary/Ghost variants of butt
 ]
 ```
 
-
 <!-- source: rules/layout-auto-layout.md -->
 
 ---
@@ -2026,667 +2010,6 @@ All container frames must specify the `layout` attribute. If `layout: "none"`, c
   ]
 }
 ```
-
-
-<!-- source: rules/layout-overflow.md -->
-
----
-title: Prevent Text Overflow
-impact: CRITICAL
-impactDescription: If textGrowth is missing, the text will exceed the container and the UI will break.
-tags: layout,overflow,text,textGrowth
----
-
-## Prevent Text Overflow
-
-Text nodes must have the `textGrowth` property specified. If you only have a fixed `width` and no `textGrowth`, long text will either spill out of the container or be truncated. Set the width to `fill_container` and `textGrowth` to `"fixed-width"` to get word wrapping to work.
-
-**Incorrect (why it's bad):**
-
-```json
-{
-  "type": "frame",
-  "id": "description-block",
-  "layout": "vertical",
-  "width": 480,
-  "children": [
-    {
-      "type": "text",
-      "id": "desc",
-      "fontWeight": "$font.weight.regular",
-      "width": 480,
-      "height": 20,
-      "fontSize": "$font.size.base",
-      "content": "This text is very long and may not fit on one line."
-    }
-  ]
-}
-```
-
-**Correct (Why it’s good):**
-
-```json
-{
-  "type": "frame",
-  "id": "description-block",
-  "layout": "vertical",
-  "gap": "$space.sm",
-  "width": "fill_container",
-  "children": [
-    {
-      "type": "text",
-      "id": "desc",
-      "fontWeight": "$font.weight.regular",
-      "width": "fill_container",
-      "height": "fit_content",
-      "textGrowth": "fixed-width",
-      "fontSize": "$font.size.base",
-      "lineHeight": 1.6,
-      "fill": "$color.foreground",
-      "content": "This text is very long and may not fit on one line.",
-      "fontFamily": "$font.family.body"
-    }
-  ]
-}
-```
-
-
-<!-- source: rules/layout-responsive.md -->
-
----
-title: Responsive via Separate Frames
-impact: HIGH
-impactDescription: Responsive simulates independent frames for each resolution rather than processing single frame conditions.
-tags: layout,responsive,breakpoint,mobile,desktop
----
-
-## Responsive via Separate Frames
-
-Since .pen does not have a CSS media query, the responsive version creates and expresses an independent frame for each resolution: 375 (mobile), 768 (tablet), and 1440 (desktop). Share components as `ref` to minimize duplication. If you try to handle all resolutions in one frame, layout becomes impossible.
-
-**Incorrect (why it's bad):**
-
-- No idea how it will look on mobile
-
-```json
-{
-  "type": "frame",
-  "id": "page-all",
-  "width": 1440,
-  "layout": "vertical",
-  "children": [
-    {
-      "type": "frame",
-      "id": "nav",
-      "width": "fill_container"
-    }
-  ]
-}
-```
-
-**Correct (Why it’s good):**
-
-```json
-[
-  {
-    "type": "frame",
-    "id": "page-mobile",
-    "width": 375,
-    "height": "fit_content",
-    "layout": "vertical",
-    "gap": 0,
-    "children": [
-      {
-        "type": "ref",
-        "ref": "nav-mobile-comp",
-        "id": "nav-mobile"
-      },
-      {
-        "type": "ref",
-        "ref": "hero-mobile-comp",
-        "id": "hero-mobile"
-      }
-    ]
-  },
-  {
-    "type": "frame",
-    "id": "page-tablet",
-    "width": 768,
-    "height": "fit_content",
-    "layout": "vertical",
-    "gap": 0,
-    "children": [
-      {
-        "type": "ref",
-        "ref": "nav-topbar",
-        "id": "nav-tablet"
-      },
-      {
-        "type": "ref",
-        "ref": "hero-default",
-        "id": "hero-tablet"
-      }
-    ]
-  },
-  {
-    "type": "frame",
-    "id": "page-desktop",
-    "width": 1440,
-    "height": "fit_content",
-    "layout": "vertical",
-    "gap": 0,
-    "children": [
-      {
-        "type": "ref",
-        "ref": "nav-topbar",
-        "id": "nav-desktop"
-      },
-      {
-        "type": "ref",
-        "ref": "hero-wide",
-        "id": "hero-desktop"
-      }
-    ]
-  }
-]
-```
-
-
-<!-- source: rules/layout-sizing.md -->
-
----
-title: Sizing Mode by Context
-impact: CRITICAL
-impactDescription: Overuse of fixed px makes responsive layouts impossible.
-tags: layout,sizing,responsive,width,height
----
-
-## Sizing Mode by Context
-
-Depending on the role of the element, different size modes must be applied. The principle is that the screen frame is fixed px, section/row is `fill_container`, text block is `fit_content`, and button label is `auto`. If you use fixed px everywhere, it will get cut off or have spaces as the content expands.
-
-**Incorrect (why it's bad):**
-
-```json
-{
-  "type": "frame",
-  "id": "page",
-  "width": 1440,
-  "height": 900,
-  "children": [
-    {
-      "type": "frame",
-      "id": "section-hero",
-      "width": 1440,
-      "height": 600,
-      "children": [
-        {
-          "type": "text",
-          "id": "headline",
-          "fontWeight": "$font.weight.bold",
-          "width": 600,
-          "height": 48,
-          "content": "Headline"
-        },
-        {
-          "type": "text",
-          "id": "sub",
-          "fontWeight": "$font.weight.regular",
-          "width": 600,
-          "height": 24,
-          "content": "Subtitle text"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**Correct (Why it’s good):**
-
-```json
-{
-  "type": "frame",
-  "id": "page",
-  "width": 1440,
-  "height": 900,
-  "children": [
-    {
-      "type": "frame",
-      "id": "section-hero",
-      "width": "fill_container",
-      "height": "fit_content",
-      "layout": "vertical",
-      "gap": "$space.lg",
-      "padding": [
-        "$space.section",
-        "$space.page",
-        "$space.section",
-        "$space.page"
-      ],
-      "children": [
-        {
-          "type": "text",
-          "id": "headline",
-          "fontWeight": "$font.weight.bold",
-          "width": "fill_container",
-          "height": "fit_content",
-          "textGrowth": "auto",
-          "content": "Headline",
-          "fontFamily": "$font.family.display"
-        },
-        {
-          "type": "text",
-          "id": "sub",
-          "fontWeight": "$font.weight.regular",
-          "width": "fill_container",
-          "height": "fit_content",
-          "textGrowth": "auto",
-          "content": "Subtitle text",
-          "fontFamily": "$font.family.display"
-        }
-      ]
-    }
-  ]
-}
-```
-
-
-<!-- source: rules/layout-spacing-consistency.md -->
-
----
-title: Gap/Padding Only — No Spacer Frames
-impact: HIGH
-impactDescription: Empty frame spacers are hard to maintain and pollute the layout hierarchy.
-tags: layout,spacing,gap,padding,spacer
----
-
-## Gap/Padding Only — No Spacer Frames
-
-Never use empty frames (spacers) to create spacing. All spacing must be expressed using only the parent frame's `gap` or `padding` properties. Empty spacers increase child count, hurt readability, and force you to find and edit every spacer later when adjusting spacing.
-
-**Incorrect (Why it's bad):**
-
-- Empty frame for spacing
-
-```json
-{
-  "type": "frame",
-  "id": "form",
-  "layout": "vertical",
-  "children": [
-    {
-      "type": "frame",
-      "id": "field-email",
-      "width": "fill_container",
-      "height": 48
-    },
-    {
-      "type": "frame",
-      "id": "spacer-1",
-      "width": "fill_container",
-      "height": 24
-    },
-    {
-      "type": "frame",
-      "id": "field-password",
-      "width": "fill_container",
-      "height": 48
-    },
-    {
-      "type": "frame",
-      "id": "spacer-2",
-      "width": "fill_container",
-      "height": 24
-    },
-    {
-      "type": "frame",
-      "id": "btn-submit",
-      "width": "fill_container",
-      "height": 44
-    }
-  ]
-}
-```
-
-**Correct (Why it's good):**
-
-```json
-{
-  "type": "frame",
-  "id": "form",
-  "layout": "vertical",
-  "gap": "$space.lg",
-  "padding": [
-    "$space.xl",
-    "$space.xl",
-    "$space.xl",
-    "$space.xl"
-  ],
-  "width": "fill_container",
-  "children": [
-    {
-      "type": "frame",
-      "id": "field-email",
-      "width": "fill_container",
-      "height": 48
-    },
-    {
-      "type": "frame",
-      "id": "field-password",
-      "width": "fill_container",
-      "height": 48
-    },
-    {
-      "type": "frame",
-      "id": "btn-submit",
-      "width": "fill_container",
-      "height": 44
-    }
-  ]
-}
-```
-
-
-<!-- source: rules/layout-z-order.md -->
-
----
-title: Z-Order via Children Order
-impact: HIGH
-impactDescription: Because the `children` array order determines z-order, overlays/badges must be placed last.
-tags: layout,z-order,overlay,badge,children
----
-
-## Z-Order via Children Order
-
-In `.pen`, z-order is determined by the order of the `children` array. Children that come later render on top. Overlays, badges, modal backdrops, and similar layers must be placed at the end of `children`, and the container should use `layout: "none"` (absolute positioning).
-
-**Incorrect (Why it's bad):**
-
-- Badge comes first — hidden under the image
-
-```json
-{
-  "type": "frame",
-  "id": "product-card",
-  "layout": "vertical",
-  "children": [
-    {
-      "type": "frame",
-      "id": "badge-new",
-      "fill": "$color.primary",
-      "width": 48,
-      "height": 24
-    },
-    {
-      "type": "frame",
-      "id": "product-img",
-      "width": "fill_container",
-      "height": 200,
-      "fill": {
-        "type": "image",
-        "url": "product.jpg",
-        "mode": "fill"
-      }
-    },
-    {
-      "type": "text",
-      "id": "product-name",
-      "fontWeight": "$font.weight.semibold",
-      "content": "Product Name",
-      "textGrowth": "auto"
-    }
-  ]
-}
-```
-
-**Correct (Why it's good):**
-
-- Badge comes last — renders above the image
-
-```json
-{
-  "type": "frame",
-  "id": "product-card",
-  "layout": "none",
-  "width": 320,
-  "height": 280,
-  "children": [
-    {
-      "type": "frame",
-      "id": "card-content",
-      "layout": "vertical",
-      "x": 0,
-      "y": 0,
-      "width": 320,
-      "height": 280,
-      "children": [
-        {
-          "type": "frame",
-          "id": "product-img",
-          "width": "fill_container",
-          "height": 200,
-          "fill": {
-            "type": "image",
-            "url": "product.jpg",
-            "mode": "fill"
-          }
-        },
-        {
-          "type": "text",
-          "id": "product-name",
-          "fontWeight": "$font.weight.semibold",
-          "content": "Product Name",
-          "fill": "$color.foreground",
-          "textGrowth": "auto",
-          "fontFamily": "$font.family.body"
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "badge-new",
-      "x": 12,
-      "y": 12,
-      "width": 48,
-      "height": 24,
-      "fill": "$color.primary",
-      "cornerRadius": "$radius.xs",
-      "children": [
-        {
-          "type": "text",
-          "id": "badge-label",
-          "fontWeight": "$font.weight.bold",
-          "content": "NEW",
-          "fill": "$color.on-primary",
-          "fontSize": "$font.size.xs",
-          "textGrowth": "auto",
-          "fontFamily": "$font.family.body"
-        }
-      ]
-    }
-  ]
-}
-```
-
-
-<!-- source: rules/layout-no-overlap.md -->
-
----
-title: Prevent overlap between elements
-impact: CRITICAL
-impactDescription: Without width calculation and placement rules between sibling elements, feeds/sidebars overlap in 3-column layouts.
-tags: layout,no-overlap,three-column,auto-layout,overflow
----
-
-## Prevent overlap between elements
-
-The most common causes of sibling elements overlapping in a three-column layout are overuse of `fit_content`, omission of `gap`, unverified width summation, and absolute coordinate placement. Be sure to place sibling frames using Auto Layout, and specify the `width` of each column as a fixed value or `fill_container`. Only overlays/modals allow the `layout: "none"` + z-order exception.
-
-Essential rules:
-1. In a three-column layout, each column must specify `width` as a fixed value or `fill_container` (parallel placement of `fit_content` is prohibited)
-2. Parent frame requires `layout: "horizontal"` + `gap`
-3. Calculate column width sum + gap so that it does not exceed the parent width
-4. Do not use `x`, `y` absolute coordinates for sibling placement (Auto Layout required)
-5. Overlay/modal only exception (see z-order rules)
-
-**Incorrect (why it's bad):**
-
-```json
-{
-  "type": "frame",
-  "id": "layout-shell",
-  "width": "$layout.page.width",
-  "height": "fit_content",
-  "layout": "none",
-  "children": [
-    {
-      "type": "frame",
-      "id": "left-sidebar",
-      "x": 0,
-      "y": 0,
-      "width": "fit_content",
-      "height": "fit_content",
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "text",
-          "id": "left-title",
-          "content": "my community",
-          "fontFamily": "$font.family.body",
-          "fontWeight": "$font.weight.semibold",
-          "textGrowth": "auto",
-          "fill": "$color.foreground"
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "feed-column",
-      "x": 220,
-      "y": 0,
-      "width": "fit_content",
-      "height": "fit_content",
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "text",
-          "id": "feed-title",
-          "content": "feed",
-          "fontFamily": "$font.family.display",
-          "fontWeight": "$font.weight.semibold",
-          "textGrowth": "auto",
-          "fill": "$color.foreground"
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "right-sidebar",
-      "x": 980,
-      "y": 0,
-      "width": "fit_content",
-      "height": "fit_content",
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "text",
-          "id": "right-title",
-          "content": "Trending",
-          "fontFamily": "$font.family.body",
-          "fontWeight": "$font.weight.semibold",
-          "textGrowth": "auto",
-          "fill": "$color.foreground"
-        }
-      ]
-    }
-  ]
-}
-```
-
-**Correct (Why it’s good):**
-
-```json
-{
-  "type": "frame",
-  "id": "layout-shell",
-  "width": "$layout.page.width",
-  "height": "fit_content",
-  "layout": "horizontal",
-  "gap": "$space.section",
-  "padding": [
-    "$space.section",
-    "$space.section",
-    "$space.section",
-    "$space.section"
-  ],
-  "alignItems": "start",
-  "children": [
-    {
-      "type": "frame",
-      "id": "left-sidebar",
-      "width": "$layout.sidebar.left",
-      "height": "fit_content",
-      "layout": "vertical",
-      "gap": "$space.md",
-      "children": [
-        {
-          "type": "text",
-          "id": "left-title",
-          "content": "my community",
-          "fontFamily": "$font.family.body",
-          "fontWeight": "$font.weight.semibold",
-          "textGrowth": "auto",
-          "fill": "$color.foreground"
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "feed-column",
-      "width": "fill_container",
-      "height": "fit_content",
-      "layout": "vertical",
-      "gap": "$space.lg",
-      "children": [
-        {
-          "type": "text",
-          "id": "feed-title",
-          "content": "feed",
-          "fontFamily": "$font.family.display",
-          "fontWeight": "$font.weight.semibold",
-          "textGrowth": "auto",
-          "fill": "$color.foreground"
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "right-sidebar",
-      "width": "$layout.sidebar.right",
-      "height": "fit_content",
-      "layout": "vertical",
-      "gap": "$space.md",
-      "children": [
-        {
-          "type": "text",
-          "id": "right-title",
-          "content": "Trending",
-          "fontFamily": "$font.family.body",
-          "fontWeight": "$font.weight.semibold",
-          "textGrowth": "auto",
-          "fill": "$color.foreground"
-        }
-      ]
-    }
-  ]
-}
-```
-
-Width verification example:
-- `left(200) + center(fill) + right(280) + gap(32 * 2) + padding(32 * 2) <= parent(1440)`
-- The fixed width sum and spacing must be confirmed first so the central `fill_container` can safely occupy the remaining space.
-
 
 <!-- source: rules/layout-canvas-placement.md -->
 
@@ -2887,7 +2210,659 @@ Canvas Layout:
   ]
 }
 ```
+<!-- source: rules/layout-no-overlap.md -->
 
+---
+title: Prevent overlap between elements
+impact: CRITICAL
+impactDescription: Without width calculation and placement rules between sibling elements, feeds/sidebars overlap in 3-column layouts.
+tags: layout,no-overlap,three-column,auto-layout,overflow
+---
+
+## Prevent overlap between elements
+
+The most common causes of sibling elements overlapping in a three-column layout are overuse of `fit_content`, omission of `gap`, unverified width summation, and absolute coordinate placement. Be sure to place sibling frames using Auto Layout, and specify the `width` of each column as a fixed value or `fill_container`. Only overlays/modals allow the `layout: "none"` + z-order exception.
+
+Essential rules:
+1. In a three-column layout, each column must specify `width` as a fixed value or `fill_container` (parallel placement of `fit_content` is prohibited)
+2. Parent frame requires `layout: "horizontal"` + `gap`
+3. Calculate column width sum + gap so that it does not exceed the parent width
+4. Do not use `x`, `y` absolute coordinates for sibling placement (Auto Layout required)
+5. Overlay/modal only exception (see z-order rules)
+
+**Incorrect (why it's bad):**
+
+```json
+{
+  "type": "frame",
+  "id": "layout-shell",
+  "width": "$layout.page.width",
+  "height": "fit_content",
+  "layout": "none",
+  "children": [
+    {
+      "type": "frame",
+      "id": "left-sidebar",
+      "x": 0,
+      "y": 0,
+      "width": "fit_content",
+      "height": "fit_content",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "text",
+          "id": "left-title",
+          "content": "my community",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.semibold",
+          "textGrowth": "auto",
+          "fill": "$color.foreground"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "feed-column",
+      "x": 220,
+      "y": 0,
+      "width": "fit_content",
+      "height": "fit_content",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "text",
+          "id": "feed-title",
+          "content": "feed",
+          "fontFamily": "$font.family.display",
+          "fontWeight": "$font.weight.semibold",
+          "textGrowth": "auto",
+          "fill": "$color.foreground"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "right-sidebar",
+      "x": 980,
+      "y": 0,
+      "width": "fit_content",
+      "height": "fit_content",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "text",
+          "id": "right-title",
+          "content": "Trending",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.semibold",
+          "textGrowth": "auto",
+          "fill": "$color.foreground"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Correct (Why it’s good):**
+
+```json
+{
+  "type": "frame",
+  "id": "layout-shell",
+  "width": "$layout.page.width",
+  "height": "fit_content",
+  "layout": "horizontal",
+  "gap": "$space.section",
+  "padding": [
+    "$space.section",
+    "$space.section",
+    "$space.section",
+    "$space.section"
+  ],
+  "alignItems": "start",
+  "children": [
+    {
+      "type": "frame",
+      "id": "left-sidebar",
+      "width": "$layout.sidebar.left",
+      "height": "fit_content",
+      "layout": "vertical",
+      "gap": "$space.md",
+      "children": [
+        {
+          "type": "text",
+          "id": "left-title",
+          "content": "my community",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.semibold",
+          "textGrowth": "auto",
+          "fill": "$color.foreground"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "feed-column",
+      "width": "fill_container",
+      "height": "fit_content",
+      "layout": "vertical",
+      "gap": "$space.lg",
+      "children": [
+        {
+          "type": "text",
+          "id": "feed-title",
+          "content": "feed",
+          "fontFamily": "$font.family.display",
+          "fontWeight": "$font.weight.semibold",
+          "textGrowth": "auto",
+          "fill": "$color.foreground"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "right-sidebar",
+      "width": "$layout.sidebar.right",
+      "height": "fit_content",
+      "layout": "vertical",
+      "gap": "$space.md",
+      "children": [
+        {
+          "type": "text",
+          "id": "right-title",
+          "content": "Trending",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.semibold",
+          "textGrowth": "auto",
+          "fill": "$color.foreground"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Width verification example:
+- `left(200) + center(fill) + right(280) + gap(32 * 2) + padding(32 * 2) <= parent(1440)`
+- The fixed width sum and spacing must be confirmed first so the central `fill_container` can safely occupy the remaining space.
+
+<!-- source: rules/layout-overflow.md -->
+
+---
+title: Prevent Text Overflow
+impact: CRITICAL
+impactDescription: If textGrowth is missing, the text will exceed the container and the UI will break.
+tags: layout,overflow,text,textGrowth
+---
+
+## Prevent Text Overflow
+
+Text nodes must have the `textGrowth` property specified. If you only have a fixed `width` and no `textGrowth`, long text will either spill out of the container or be truncated. Set the width to `fill_container` and `textGrowth` to `"fixed-width"` to get word wrapping to work.
+
+**Incorrect (why it's bad):**
+
+```json
+{
+  "type": "frame",
+  "id": "description-block",
+  "layout": "vertical",
+  "width": 480,
+  "children": [
+    {
+      "type": "text",
+      "id": "desc",
+      "fontWeight": "$font.weight.regular",
+      "width": 480,
+      "height": 20,
+      "fontSize": "$font.size.base",
+      "content": "This text is very long and may not fit on one line."
+    }
+  ]
+}
+```
+
+**Correct (Why it’s good):**
+
+```json
+{
+  "type": "frame",
+  "id": "description-block",
+  "layout": "vertical",
+  "gap": "$space.sm",
+  "width": "fill_container",
+  "children": [
+    {
+      "type": "text",
+      "id": "desc",
+      "fontWeight": "$font.weight.regular",
+      "width": "fill_container",
+      "height": "fit_content",
+      "textGrowth": "fixed-width",
+      "fontSize": "$font.size.base",
+      "lineHeight": 1.6,
+      "fill": "$color.foreground",
+      "content": "This text is very long and may not fit on one line.",
+      "fontFamily": "$font.family.body"
+    }
+  ]
+}
+```
+
+<!-- source: rules/layout-responsive.md -->
+
+---
+title: Responsive via Separate Frames
+impact: HIGH
+impactDescription: Responsive simulates independent frames for each resolution rather than processing single frame conditions.
+tags: layout,responsive,breakpoint,mobile,desktop
+---
+
+## Responsive via Separate Frames
+
+Since .pen does not have a CSS media query, the responsive version creates and expresses an independent frame for each resolution: 375 (mobile), 768 (tablet), and 1440 (desktop). Share components as `ref` to minimize duplication. If you try to handle all resolutions in one frame, layout becomes impossible.
+
+**Incorrect (why it's bad):**
+
+- No idea how it will look on mobile
+
+```json
+{
+  "type": "frame",
+  "id": "page-all",
+  "width": 1440,
+  "layout": "vertical",
+  "children": [
+    {
+      "type": "frame",
+      "id": "nav",
+      "width": "fill_container"
+    }
+  ]
+}
+```
+
+**Correct (Why it’s good):**
+
+```json
+[
+  {
+    "type": "frame",
+    "id": "page-mobile",
+    "width": 375,
+    "height": "fit_content",
+    "layout": "vertical",
+    "gap": 0,
+    "children": [
+      {
+        "type": "ref",
+        "ref": "nav-mobile-comp",
+        "id": "nav-mobile"
+      },
+      {
+        "type": "ref",
+        "ref": "hero-mobile-comp",
+        "id": "hero-mobile"
+      }
+    ]
+  },
+  {
+    "type": "frame",
+    "id": "page-tablet",
+    "width": 768,
+    "height": "fit_content",
+    "layout": "vertical",
+    "gap": 0,
+    "children": [
+      {
+        "type": "ref",
+        "ref": "nav-topbar",
+        "id": "nav-tablet"
+      },
+      {
+        "type": "ref",
+        "ref": "hero-default",
+        "id": "hero-tablet"
+      }
+    ]
+  },
+  {
+    "type": "frame",
+    "id": "page-desktop",
+    "width": 1440,
+    "height": "fit_content",
+    "layout": "vertical",
+    "gap": 0,
+    "children": [
+      {
+        "type": "ref",
+        "ref": "nav-topbar",
+        "id": "nav-desktop"
+      },
+      {
+        "type": "ref",
+        "ref": "hero-wide",
+        "id": "hero-desktop"
+      }
+    ]
+  }
+]
+```
+
+<!-- source: rules/layout-sizing.md -->
+
+---
+title: Sizing Mode by Context
+impact: CRITICAL
+impactDescription: Overuse of fixed px makes responsive layouts impossible.
+tags: layout,sizing,responsive,width,height
+---
+
+## Sizing Mode by Context
+
+Depending on the role of the element, different size modes must be applied. The principle is that the screen frame is fixed px, section/row is `fill_container`, text block is `fit_content`, and button label is `auto`. If you use fixed px everywhere, it will get cut off or have spaces as the content expands.
+
+**Incorrect (why it's bad):**
+
+```json
+{
+  "type": "frame",
+  "id": "page",
+  "width": 1440,
+  "height": 900,
+  "children": [
+    {
+      "type": "frame",
+      "id": "section-hero",
+      "width": 1440,
+      "height": 600,
+      "children": [
+        {
+          "type": "text",
+          "id": "headline",
+          "fontWeight": "$font.weight.bold",
+          "width": 600,
+          "height": 48,
+          "content": "Headline"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "fontWeight": "$font.weight.regular",
+          "width": 600,
+          "height": 24,
+          "content": "Subtitle text"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Correct (Why it’s good):**
+
+```json
+{
+  "type": "frame",
+  "id": "page",
+  "width": 1440,
+  "height": 900,
+  "children": [
+    {
+      "type": "frame",
+      "id": "section-hero",
+      "width": "fill_container",
+      "height": "fit_content",
+      "layout": "vertical",
+      "gap": "$space.lg",
+      "padding": [
+        "$space.section",
+        "$space.page",
+        "$space.section",
+        "$space.page"
+      ],
+      "children": [
+        {
+          "type": "text",
+          "id": "headline",
+          "fontWeight": "$font.weight.bold",
+          "width": "fill_container",
+          "height": "fit_content",
+          "textGrowth": "auto",
+          "content": "Headline",
+          "fontFamily": "$font.family.display"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "fontWeight": "$font.weight.regular",
+          "width": "fill_container",
+          "height": "fit_content",
+          "textGrowth": "auto",
+          "content": "Subtitle text",
+          "fontFamily": "$font.family.display"
+        }
+      ]
+    }
+  ]
+}
+```
+
+<!-- source: rules/layout-spacing-consistency.md -->
+
+---
+title: Gap/Padding Only — No Spacer Frames
+impact: HIGH
+impactDescription: Empty frame spacers are hard to maintain and pollute the layout hierarchy.
+tags: layout,spacing,gap,padding,spacer
+---
+
+## Gap/Padding Only — No Spacer Frames
+
+Never use empty frames (spacers) to create spacing. All spacing must be expressed using only the parent frame's `gap` or `padding` properties. Empty spacers increase child count, hurt readability, and force you to find and edit every spacer later when adjusting spacing.
+
+**Incorrect (Why it's bad):**
+
+- Empty frame for spacing
+
+```json
+{
+  "type": "frame",
+  "id": "form",
+  "layout": "vertical",
+  "children": [
+    {
+      "type": "frame",
+      "id": "field-email",
+      "width": "fill_container",
+      "height": 48
+    },
+    {
+      "type": "frame",
+      "id": "spacer-1",
+      "width": "fill_container",
+      "height": 24
+    },
+    {
+      "type": "frame",
+      "id": "field-password",
+      "width": "fill_container",
+      "height": 48
+    },
+    {
+      "type": "frame",
+      "id": "spacer-2",
+      "width": "fill_container",
+      "height": 24
+    },
+    {
+      "type": "frame",
+      "id": "btn-submit",
+      "width": "fill_container",
+      "height": 44
+    }
+  ]
+}
+```
+
+**Correct (Why it's good):**
+
+```json
+{
+  "type": "frame",
+  "id": "form",
+  "layout": "vertical",
+  "gap": "$space.lg",
+  "padding": [
+    "$space.xl",
+    "$space.xl",
+    "$space.xl",
+    "$space.xl"
+  ],
+  "width": "fill_container",
+  "children": [
+    {
+      "type": "frame",
+      "id": "field-email",
+      "width": "fill_container",
+      "height": 48
+    },
+    {
+      "type": "frame",
+      "id": "field-password",
+      "width": "fill_container",
+      "height": 48
+    },
+    {
+      "type": "frame",
+      "id": "btn-submit",
+      "width": "fill_container",
+      "height": 44
+    }
+  ]
+}
+```
+
+<!-- source: rules/layout-z-order.md -->
+
+---
+title: Z-Order via Children Order
+impact: HIGH
+impactDescription: Because the `children` array order determines z-order, overlays/badges must be placed last.
+tags: layout,z-order,overlay,badge,children
+---
+
+## Z-Order via Children Order
+
+In `.pen`, z-order is determined by the order of the `children` array. Children that come later render on top. Overlays, badges, modal backdrops, and similar layers must be placed at the end of `children`, and the container should use `layout: "none"` (absolute positioning).
+
+**Incorrect (Why it's bad):**
+
+- Badge comes first — hidden under the image
+
+```json
+{
+  "type": "frame",
+  "id": "product-card",
+  "layout": "vertical",
+  "children": [
+    {
+      "type": "frame",
+      "id": "badge-new",
+      "fill": "$color.primary",
+      "width": 48,
+      "height": 24
+    },
+    {
+      "type": "frame",
+      "id": "product-img",
+      "width": "fill_container",
+      "height": 200,
+      "fill": {
+        "type": "image",
+        "url": "product.jpg",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "text",
+      "id": "product-name",
+      "fontWeight": "$font.weight.semibold",
+      "content": "Product Name",
+      "textGrowth": "auto"
+    }
+  ]
+}
+```
+
+**Correct (Why it's good):**
+
+- Badge comes last — renders above the image
+
+```json
+{
+  "type": "frame",
+  "id": "product-card",
+  "layout": "none",
+  "width": 320,
+  "height": 280,
+  "children": [
+    {
+      "type": "frame",
+      "id": "card-content",
+      "layout": "vertical",
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 280,
+      "children": [
+        {
+          "type": "frame",
+          "id": "product-img",
+          "width": "fill_container",
+          "height": 200,
+          "fill": {
+            "type": "image",
+            "url": "product.jpg",
+            "mode": "fill"
+          }
+        },
+        {
+          "type": "text",
+          "id": "product-name",
+          "fontWeight": "$font.weight.semibold",
+          "content": "Product Name",
+          "fill": "$color.foreground",
+          "textGrowth": "auto",
+          "fontFamily": "$font.family.body"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "badge-new",
+      "x": 12,
+      "y": 12,
+      "width": 48,
+      "height": 24,
+      "fill": "$color.primary",
+      "cornerRadius": "$radius.xs",
+      "children": [
+        {
+          "type": "text",
+          "id": "badge-label",
+          "fontWeight": "$font.weight.bold",
+          "content": "NEW",
+          "fill": "$color.on-primary",
+          "fontSize": "$font.size.xs",
+          "textGrowth": "auto",
+          "fontFamily": "$font.family.body"
+        }
+      ]
+    }
+  ]
+}
+```
 
 <!-- source: rules/showcase-design-system.md -->
 
@@ -2956,8 +2931,8 @@ Creating a new card immediately without search-nodes
 Step 1: Search existing reusable items (run CLI search-nodes)
 
 ```bash
-search-nodes --query "card" --reusable
-search-nodes --query "button primary" --reusable
+node scripts/search-nodes.mjs design.pen --name "card" --reusable
+node scripts/search-nodes.mjs design.pen --name "button" --reusable
 ```
 
 Step 2: Found `card-product` in search results → create instance via `ref`
@@ -2989,8 +2964,6 @@ Step 2: Found `card-product` in search results → create instance via `ref`
   }
 ]
 ```
-
-
 <!-- source: rules/showcase-final-checklist.md -->
 
 ---
@@ -3052,7 +3025,6 @@ After completing the design, you must pass the checklist below. If any item fail
 - [ ] Confirm no errors with `node scripts/validate-pen.mjs`
 - [ ] Are all ids unique?
 - [ ] Does the showcase frame include color/type/component inventory?
-
 
 <!-- source: rules/showcase-frame.md -->
 
@@ -3234,7 +3206,6 @@ For a new project without an existing design system, create the showcase frame b
 }
 ```
 
-
 <!-- source: rules/showcase-pre-design.md -->
 
 ---
@@ -3278,7 +3249,6 @@ Before starting design, define goals, audience, and tone, collect references, an
 - [ ] Verify with `get-variables`
 
 Start actual design work only after all checklist items pass.
-
 
 <!-- source: rules/spacing-8pt-grid.md -->
 
@@ -3328,7 +3298,7 @@ All gap, padding, and margin values must be multiples of 4. Allowed values: `4, 
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 ```json
@@ -3401,7 +3371,6 @@ pencil set-variables --file tokens.json
   }
 ]
 ```
-
 
 <!-- source: rules/spacing-forbidden.md -->
 
@@ -3533,7 +3502,6 @@ The three patterns below are strictly forbidden: (1) empty frames as spacers, (2
 }
 ```
 
-
 <!-- source: rules/spacing-padding.md -->
 
 ---
@@ -3664,7 +3632,6 @@ Padding should vary by element type. Small elements (buttons) need small padding
   ]
 }
 ```
-
 
 <!-- source: rules/spacing-proximity.md -->
 
@@ -3808,7 +3775,6 @@ Set small gaps between related elements, medium gaps between groups, and large g
 }
 ```
 
-
 <!-- source: rules/token-naming.md -->
 
 ---
@@ -3889,7 +3855,6 @@ All design tokens should use dot-separated naming in the `$category.purpose.vari
   }
 }
 ```
-
 
 <!-- source: rules/token-no-hardcode.md -->
 
@@ -3987,7 +3952,6 @@ Use token references (`$`) for all design properties, including `fill`, `fontSiz
   ]
 }
 ```
-
 
 <!-- source: rules/token-semantic-colors.md -->
 
@@ -4097,7 +4061,6 @@ Color tokens must use semantic names like `$color.primary`, `$color.surface`, `$
   ]
 }
 ```
-
 
 <!-- source: rules/token-theme-required.md -->
 
@@ -4220,7 +4183,6 @@ When declaring variables, you must define a `themes` axis and support at least `
 }
 ```
 
-
 <!-- source: rules/token-workflow.md -->
 
 ---
@@ -4272,8 +4234,8 @@ You must register tokens before getting started with design. Workflow: ① Regis
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
-pencil get-variables
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
+node scripts/get-variables.mjs design.pen
 ```
 
 - Step 1: Token registration
@@ -4389,7 +4351,6 @@ pencil get-variables
 ]
 ```
 
-
 <!-- source: rules/typo-line-height.md -->
 
 ---
@@ -4455,7 +4416,7 @@ Line height should vary by text size. As a rule: large display text tight (1.1),
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 - display — 48px+ large headings
@@ -4539,7 +4500,6 @@ pencil set-variables --file tokens.json
   }
 ]
 ```
-
 
 <!-- source: rules/typo-pairing.md -->
 
@@ -4650,7 +4610,6 @@ Combining a Display font (hero/headings) with a Body font (body/UI) creates visu
 }
 ```
 
-
 <!-- source: rules/typo-scale.md -->
 
 ---
@@ -4737,7 +4696,6 @@ Define type scale with at least 6 steps (xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5x
   }
 }
 ```
-
 
 <!-- source: rules/typo-text-rules.md -->
 
@@ -4834,7 +4792,6 @@ Optimal readability for body text is about 65–75 characters per line. If `widt
   "alignItems": "center"
 }
 ```
-
 
 <!-- source: rules/typo-weight.md -->
 

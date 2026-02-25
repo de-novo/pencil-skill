@@ -63,8 +63,8 @@ Creating a new card immediately without search-nodes
 Step 1: Search existing reusable items (run CLI search-nodes)
 
 ```bash
-search-nodes --query "card" --reusable
-search-nodes --query "button primary" --reusable
+node scripts/search-nodes.mjs design.pen --name "card" --reusable
+node scripts/search-nodes.mjs design.pen --name "button" --reusable
 ```
 
 Step 2: Found `card-product` in search results → create instance via `ref`

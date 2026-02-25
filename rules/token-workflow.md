@@ -47,8 +47,8 @@ You must register tokens before getting started with design. Workflow: ① Regis
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
-pencil get-variables
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
+node scripts/get-variables.mjs design.pen
 ```
 
 - Step 1: Token registration

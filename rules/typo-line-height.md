@@ -61,7 +61,7 @@ Line height should vary by text size. As a rule: large display text tight (1.1),
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 - display — 48px+ large headings

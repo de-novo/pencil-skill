@@ -42,7 +42,7 @@ Create new button directly without search-nodes
 Step 1: First, search for existing reusables (run CLI search-nodes)
 
 ```bash
-search-nodes --query "button" --reusable
+node scripts/search-nodes.mjs design.pen --name "button" --reusable
 ```
 
 Step 2: Search result: `btn-primary` → Create instance with `ref`

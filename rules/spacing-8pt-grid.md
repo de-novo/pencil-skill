@@ -44,7 +44,7 @@ All gap, padding, and margin values must be multiples of 4. Allowed values: `4, 
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 ```json

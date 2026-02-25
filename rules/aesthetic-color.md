@@ -13,7 +13,7 @@ tags: aesthetic,color,palette,anti-ai,gradient
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 ```json
@@ -43,7 +43,7 @@ pencil set-variables --file tokens.json
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 - Brand-specific teal tones — not Tailwind defaults

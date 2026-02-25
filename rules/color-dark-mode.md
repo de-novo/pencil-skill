@@ -13,7 +13,7 @@ In dark mode, it is prohibited to use `#000000` for background and `#FFFFFF` for
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 ```json
@@ -84,7 +84,7 @@ pencil set-variables --file tokens.json
 
 ```bash
 # CLI command (run in terminal)
-pencil set-variables --file tokens.json
+node scripts/set-variables.mjs design.pen --var '<name>=<type>:<value>'
 ```
 
 - light=warm white, dark=deep navy
