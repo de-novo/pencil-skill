@@ -19,14 +19,14 @@ node scripts/read-tree.mjs mydesign.pen
 
 # Search for nodes by type or name
 node scripts/search-nodes.mjs mydesign.pen --type text
-node scripts/search-nodes.mjs mydesign.pen --query "button"
+node scripts/search-nodes.mjs mydesign.pen --name "button"
 
 # Get/set design variables
 node scripts/get-variables.mjs mydesign.pen
-node scripts/set-variables.mjs mydesign.pen --var 'color.primary' --value '#3B82F6'
+node scripts/set-variables.mjs mydesign.pen --var 'color.primary=color:#3B82F6'
 
 # Batch operations
-node scripts/batch-design.mjs mydesign.pen --ops '[{"op":"rename","id":"node1","name":"Header"}]'
+node scripts/batch-design.mjs mydesign.pen --ops '[{"op":"update","id":"node1","props":{"name":"Header"}}]'
 
 # Find available space for new elements
 node scripts/find-space.mjs mydesign.pen --width 200 --height 100

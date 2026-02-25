@@ -329,13 +329,13 @@ node scripts/set-variables.mjs file.pen --var 'space.md=number:12'
 
 ## Design Rules
 
-Required rules for production-grade design. 40 rules, 8 categories.
+Required rules for production-grade design. 41 rules, 8 categories.
 
 ### Rule Categories by Priority
 
 | Priority | Category | Impact | Prefix | Rules |
 |----------|----------|--------|--------|-------|
-| 1 | Layout & Overflow | CRITICAL | `layout-` | 7 |
+| 1 | Layout & Overflow | CRITICAL | `layout-` | 8 |
 | 2 | Design Tokens | CRITICAL | `token-` | 5 |
 | 3 | Anti-AI Aesthetic | HIGH | `aesthetic-` | 6 |
 | 4 | Component System | HIGH | `component-` | 5 |
@@ -355,6 +355,7 @@ Required rules for production-grade design. 40 rules, 8 categories.
 - `layout-spacing-consistency` — gap/padding consistency
 - `layout-z-order` — Z-order and overlay placement
 - `layout-no-overlap` — prevent element overlap
+- `layout-canvas-placement` — Top-level canvas placement, no layer overlap
 
 #### 2. Design Tokens (CRITICAL)
 

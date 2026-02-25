@@ -1,15 +1,19 @@
 // Auto-generated from pen-schema.json — do not edit directly
 
 export type PenNodeType =
-  | 'frame'
+  | 'rectangle'
+  | 'ellipse'
+  | 'line'
+  | 'polygon'
+  | 'path'
   | 'text'
-  | 'component'
-  | 'instance'
-  | 'svg'
-  | 'image'
-  | 'slot'
-  | 'boolean'
-  | 'code';
+  | 'frame'
+  | 'group'
+  | 'note'
+  | 'prompt'
+  | 'context'
+  | 'icon_font'
+  | 'ref';
 
 export type Theme = Record<string, string>;
 export type VariableRef = `$${string}`;
