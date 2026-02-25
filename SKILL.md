@@ -197,7 +197,7 @@ For every text node:
 
 ### Rule 4: Always validate after changes
 After each modification:
-1. Validate schema/lint with `validate-pen.mjs`
+1. Validate structural/lint with `validate-pen.mjs`
 2. Verify structure with `read-tree.mjs --depth 2`
 
 ### Rule 5: Reuse assets
@@ -247,7 +247,7 @@ node scripts/set-variables.mjs file.pen --var 'space.md=number:12'
 ### Validation Tool
 | Script | Purpose | Usage |
 |--------|------|--------|
-| `validate-pen.mjs` | Schema validation + lint | `node scripts/validate-pen.mjs file.pen` |
+| `validate-pen.mjs` | Structural validation + lint | `node scripts/validate-pen.mjs file.pen` |
 
 ### batch-design Operations
 

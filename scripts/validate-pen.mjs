@@ -2,9 +2,12 @@
 import fs from 'fs';
 
 const file = process.argv[2];
-if (!file) {
-  console.error('Usage: node scripts/validate-pen.mjs <file.pen>');
-  process.exit(1);
+if (!file || process.argv.includes('--help')) {
+  console.log('Usage: node scripts/validate-pen.mjs <file.pen>');
+  console.log('');
+  console.log('Validates a .pen file for structural correctness, ID uniqueness,');
+  console.log('variable references, node types, and design best practices.');
+  process.exit(file ? 0 : 1);
 }
 
 const ALLOWED = new Set([
