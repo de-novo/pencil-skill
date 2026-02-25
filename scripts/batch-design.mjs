@@ -111,7 +111,7 @@ for (let i = 0; i < ops.length; i += 1) {
         if (node.children) {
           for (const child of node.children) {
             if (child.id) {
-              child.id = `${prefix}/${child.id}`;
+              child.id = `${prefix}-${child.id}`;
             }
             prefixDescendantIds(child, prefix);
           }
@@ -120,14 +120,14 @@ for (let i = 0; i < ops.length; i += 1) {
         if (node.ref && !node.ref.startsWith('$')) {
           const refTarget = found.node.children?.some(c => c.id === node.ref);
           if (refTarget) {
-            node.ref = `${prefix}/${node.ref}`;
+            node.ref = `${prefix}-${node.ref}`;
           }
         }
         // Update descendants overrides
         if (node.descendants) {
           const newDescendants = {};
           for (const [key, val] of Object.entries(node.descendants)) {
-            newDescendants[`${prefix}/${key}`] = val;
+            newDescendants[`${prefix}-${key}`] = val;
           }
           node.descendants = newDescendants;
         }
