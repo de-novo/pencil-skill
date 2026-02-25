@@ -159,4 +159,4 @@ for (let i = 0; i < ops.length; i += 1) {
 }
 
 savePen(file, pen);
-process.stdout.write(`OK: changed ${changed} node(s)\n`);
+process.stdout.write(`OK: ${changed} operation(s) applied\n`);

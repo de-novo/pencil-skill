@@ -328,10 +328,6 @@ node scripts/set-variables.mjs file.pen --var 'space.md=number:12'
 6. validate-pen.mjs       → Validate results
 ```
 
-## References
-
-### Design Rules (Required)
-
 ## Design Rules
 
 Required rules for production-grade design. 41 rules, 8 categories.
@@ -428,7 +424,7 @@ rules/aesthetic-layout.md
 
 Compiled full-rule version: `AGENTS.md`
 
-
+## References
 
 ### Schema & Types
 - [pen-schema.json](references/pen-schema.json): Official JSON Schema (v2.8)
