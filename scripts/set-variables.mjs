@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadPen, savePen, backupPen, parseArgs, printHelpAndExit, fail } from './_utils.mjs';
 
-const HELP = `Usage: node set-variables.mjs <file.pen> --var '<name>=<type>:<value>' [--theme '<axis>=<values>']`;
+const HELP = `Usage: node scripts/set-variables.mjs <file.pen> --var '<name>=<type>:<value>' [--theme '<axis>=<values>']\n\n@theme syntax in --var values:\n  --var 'color.bg=color:#FFFFFF@light,#0F172A@dark'`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadPen, parseArgs, printHelpAndExit, fail, findNodeById } from './_utils.mjs';
 
-const HELP = `Usage: node read-tree.mjs <file.pen> [--id <nodeId>] [--depth <n>] [--types-only]\n\nPrint node tree in indented format.`;
+const HELP = `Usage: node scripts/read-tree.mjs <file.pen> [--id <nodeId>] [--depth <n>] [--types-only]\n\nPrint node tree in indented format.`;
 
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);

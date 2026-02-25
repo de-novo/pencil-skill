@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadPen, parseArgs, printHelpAndExit } from './_utils.mjs';
 
-const HELP = `Usage: node get-variables.mjs <file.pen> [--format table|json]`;
+const HELP = `Usage: node scripts/get-variables.mjs <file.pen> [--format table|json]`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];

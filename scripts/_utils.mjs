@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export function printHelpAndExit(helpText, code = 0) {
   const out = code === 0 ? process.stdout : process.stderr;

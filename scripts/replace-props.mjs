@@ -12,7 +12,7 @@ import {
   findNodeById,
 } from './_utils.mjs';
 
-const HELP = `Usage: node replace-props.mjs <file.pen> --match '<JSON>' --replace '<JSON>' [--parent-ids <id1,id2>] [--dry-run]`;
+const HELP = `Usage: node scripts/replace-props.mjs <file.pen> --match '<JSON>' --replace '<JSON>' [--parent-ids <id1,id2>] [--dry-run]`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];

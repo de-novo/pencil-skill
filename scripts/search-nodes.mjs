@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadPen, parseArgs, printHelpAndExit, fail, walkNodes } from './_utils.mjs';
 
-const HELP = `Usage: node search-nodes.mjs <file.pen> [--type <type>] [--name <regex>] [--prop <key=value>] [--reusable] [--depth <n>]`;
+const HELP = `Usage: node scripts/search-nodes.mjs <file.pen> [--type <type>] [--name <regex>] [--prop <key=value>] [--reusable] [--depth <n>]`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];

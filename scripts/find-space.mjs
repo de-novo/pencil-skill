@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadPen, parseArgs, printHelpAndExit, fail, findNodeById, toNumberOrFail } from './_utils.mjs';
 
-const HELP = `Usage: node find-space.mjs <file.pen> --width <n> --height <n> [--direction right|below|left|above] [--near <nodeId>] [--padding <n>]`;
+const HELP = `Usage: node scripts/find-space.mjs <file.pen> --width <n> --height <n> [--direction right|below|left|above] [--near <nodeId>] [--padding <n>]`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];

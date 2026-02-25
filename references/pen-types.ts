@@ -156,11 +156,13 @@ export interface PenNode extends LayoutProps {
   enabled?: BooleanOrVariable;
   locked?: boolean;
   rotation?: NumberOrVariable;
+  flipX?: BooleanOrVariable;
+  flipY?: BooleanOrVariable;
   cornerRadius?: NumberOrVariable | [NumberOrVariable, NumberOrVariable, NumberOrVariable, NumberOrVariable];
   fills?: Fill | Fill[];
   fill?: Fill | Fill[];
   strokes?: Stroke | Stroke[];
-  stroke?: Stroke;
+  stroke?: Stroke | Stroke[];
   effects?: Effect | Effect[];
   effect?: Effect | Effect[];
   theme?: Theme;
@@ -210,7 +212,7 @@ export type BlendMode =
   | 'luminosity';
 
 export interface PenDocument {
-  version: string;
+  version: '2.8';
   themes?: Record<string, string[]>;
   variables?: Record<string, PenVariable>;
   children: PenNode[];

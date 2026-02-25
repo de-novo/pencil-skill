@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import fs from 'fs';
+import fs from 'node:fs';
 import {
   loadPen,
   savePen,
@@ -16,7 +16,7 @@ import {
   clone,
 } from './_utils.mjs';
 
-const HELP = `Usage: node batch-design.mjs <file.pen> --ops '<JSON operations>'\n   or: node batch-design.mjs <file.pen> --ops-file <ops.json>`;
+const HELP = `Usage: node scripts/batch-design.mjs <file.pen> --ops '<JSON operations>'\n   or: node scripts/batch-design.mjs <file.pen> --ops-file <ops.json>`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];
@@ -38,6 +38,17 @@ backupPen(file);
 
 let changed = 0;
 const ids = collectIds(pen);
+
+
+
+function isDescendantNode(candidate, ancestorId) {
+  if (!candidate || !Array.isArray(candidate.children)) return false;
+  for (const child of candidate.children) {
+    if (child?.id === ancestorId) return true;
+    if (isDescendantNode(child, ancestorId)) return true;
+  }
+  return false;
+}
 
 function normalizeIndex(index, arrLen) {
   if (index === undefined || index === null) return arrLen;
@@ -91,6 +102,9 @@ for (let i = 0; i < ops.length; i += 1) {
       if (!found) throw new Error(`Node not found: ${op.id}`);
       const target = findNodeById(pen, op.toParentId);
       if (!target) throw new Error(`Target parent not found: ${op.toParentId}`);
+      if (op.id === op.toParentId || isDescendantNode(found.node, op.toParentId)) {
+        throw new Error(`Invalid move: cannot move ${op.id} into its own descendant (${op.toParentId})`);
+      }
       ensureChildrenArray(target.node, `target parent ${op.toParentId}`);
       found.container.splice(found.index, 1);
       const idx = normalizeIndex(op.index, target.node.children.length);

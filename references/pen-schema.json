@@ -4,7 +4,7 @@
   "required": ["version", "children"],
   "type": "object",
   "properties": {
-    "version": { "type": "string" },
+    "version": { "type": "string", "const": "2.8" },
     "fonts": {
       "_PRIVATE": true,
       "type": "array",
@@ -576,10 +576,18 @@
       ]
     },
 
+    "strokes": {
+      "description": "An object can have either a single stroke or a list of strokes, which are drawn on top of fills.",
+      "oneOf": [
+        { "$ref": "#/$defs/stroke" },
+        { "type": "array", "items": { "$ref": "#/$defs/stroke" } }
+      ]
+    },
+
     "canHaveGraphics": {
       "type": "object",
       "properties": {
-        "stroke": { "$ref": "#/$defs/stroke" },
+        "stroke": { "$ref": "#/$defs/strokes" },
         "fill": { "$ref": "#/$defs/fills" }
       },
       "$ref": "#/$defs/canHaveEffects"
