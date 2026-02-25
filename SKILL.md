@@ -217,8 +217,8 @@ Both singular and plural forms are accepted for these properties:
 
 Use singular for single values, plural for arrays. Both forms are valid in the schema.
 
-## AGENTS.md (Compiled Rules)
-`AGENTS.md` contains all 41 design rules compiled from `rules/*.md`. When this skill is loaded by an agent system, AGENTS.md provides the complete rule reference. To regenerate after editing rules: `node scripts/compile-agents.mjs`
+## AGENTS.md (Agent Guide)
+`AGENTS.md` is a concise guide with rule summaries and references to individual `rules/*.md` files for full details. To regenerate after editing rules: `node scripts/compile-agents.mjs`
 
 ## CLI Tools
 
@@ -422,7 +422,7 @@ rules/token-naming.md
 rules/aesthetic-layout.md
 ```
 
-Compiled full-rule version: `AGENTS.md`
+Agent guide with rule summaries: `AGENTS.md` — full rules in `rules/*.md`
 
 ## References
 
