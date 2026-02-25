@@ -1,27 +1,19 @@
 #!/usr/bin/env node
-import fs from 'fs';
+import { loadPen, parseArgs, printHelpAndExit, fail } from './_utils.mjs';
 
-const file = process.argv[2];
-if (!file || process.argv.includes('--help')) {
-  console.log('Usage: node scripts/validate-pen.mjs <file.pen>');
-  console.log('');
-  console.log('Validates a .pen file for structural correctness, ID uniqueness,');
-  console.log('variable references, node types, and design best practices.');
-  process.exit(file ? 0 : 1);
-}
+const HELP = `Usage: node scripts/validate-pen.mjs <file.pen>\n\nValidates a .pen file for structural correctness, ID uniqueness,\nvariable references, node types, and design best practices.`;
+const args = parseArgs(process.argv.slice(2));
+if (args.help) printHelpAndExit(HELP);
+const file = args._[0];
+if (!file) printHelpAndExit(HELP, 1);
 
 const ALLOWED = new Set([
   'rectangle','ellipse','line','polygon','path','text','frame','group','note','prompt','context','icon_font','ref'
 ]);
 
-function fail(msg){ console.error(`❌ ${msg}`); process.exit(1); }
 function warn(msg){ console.log(`⚠️ ${msg}`); }
 
-let raw;
-try { raw = fs.readFileSync(file, 'utf8'); } catch (e) { fail(`cannot read file: ${file}`); }
-
-let data;
-try { data = JSON.parse(raw); } catch (e) { fail(`invalid JSON: ${e.message}`); }
+const data = loadPen(file);
 
 if (!data.version) fail('missing top-level key: version');
 if (!Array.isArray(data.children)) fail('top-level children must be array');

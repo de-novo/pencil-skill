@@ -82,6 +82,9 @@ for (let i = 0; i < ops.length; i += 1) {
       const found = findNodeContainerById(pen, op.id);
       if (!found) throw new Error(`Node not found: ${op.id}`);
       found.container.splice(found.index, 1);
+      // Remove deleted node and all descendant IDs from tracking
+      const deletedIds = collectIds({ children: [found.node] });
+      for (const did of deletedIds) ids.delete(did);
       changed += 1;
     } else if (op.op === 'move') {
       const found = findNodeContainerById(pen, op.id);
@@ -106,7 +109,10 @@ for (let i = 0; i < ops.length; i += 1) {
       const oldRootId = copied.id;
       copied.id = op.newId;
 
-      // Auto-prefix descendant IDs to avoid duplicates
+      // Collect all original IDs in the source subtree for ref matching
+      const originalIds = collectIds({ children: [found.node] });
+      originalIds.delete(found.node.id); // exclude root (already renamed)
+
       function prefixDescendantIds(node, prefix) {
         if (node.children) {
           for (const child of node.children) {
@@ -116,14 +122,11 @@ for (let i = 0; i < ops.length; i += 1) {
             prefixDescendantIds(child, prefix);
           }
         }
-        // Update ref references within the copy
-        if (node.ref && !node.ref.startsWith('$')) {
-          const refTarget = found.node.children?.some(c => c.id === node.ref);
-          if (refTarget) {
-            node.ref = `${prefix}-${node.ref}`;
-          }
+        // Rewrite ref if it points to any ID within the original subtree
+        if (node.ref && originalIds.has(node.ref)) {
+          node.ref = `${prefix}-${node.ref}`;
         }
-        // Update descendants overrides
+        // Update descendants overrides keys
         if (node.descendants) {
           const newDescendants = {};
           for (const [key, val] of Object.entries(node.descendants)) {
