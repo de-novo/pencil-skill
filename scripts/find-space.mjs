@@ -22,7 +22,7 @@ function rectOf(node) {
   const y = Number(node?.y ?? 0);
   const w = Number(node?.width ?? 0);
   const h = Number(node?.height ?? 0);
-  return { x, y, w, h };
+  return { x: isNaN(x) ? 0 : x, y: isNaN(y) ? 0 : y, w: isNaN(w) ? 0 : w, h: isNaN(h) ? 0 : h };
 }
 
 const obstacles = top.map(rectOf);

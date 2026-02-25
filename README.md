@@ -11,7 +11,7 @@ npx skillsadd <owner>/pencil-skill
 ## Features
 
 - CLI tools for creating, validating, and editing `.pen` design files.
-- 40 design rules for consistent, production-ready UI mockups.
+- 41 design rules for consistent, production-ready UI mockups.
 - Schema v2.8 support for safe and compatible file generation.
 - Built-in light and dark theme patterns.
 
@@ -19,7 +19,7 @@ npx skillsadd <owner>/pencil-skill
 
 - `SKILL.md` — main skill instructions and workflow.
 - `scripts/` — helper scripts for validation and automation.
-- `examples/` — sample `.pen` files and references.
+- `assets/` — sample `.pen` files and references.
 - `rules/` — design rule definitions and constraints.
 
 ## License
