@@ -38,7 +38,7 @@ Creating a new card immediately without search-nodes
     {
       "type": "text",
       "id": "card-price",
-      "content": "₩29,000",
+      "content": "$29.00",
       "fontSize": 16
     },
     {
@@ -80,7 +80,7 @@ Step 2: Found `card-product` in search results → create instance via `ref`
         "content": "Product Name"
       },
       "card-price": {
-        "content": "₩29,000"
+        "content": "$29.00"
       },
       "cta-btn": {
         "type": "ref",

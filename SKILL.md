@@ -1,12 +1,6 @@
 ---
 name: pencil-skill
-description: Create and edit Pencil (.pen) design files programmatically. Generate UI designs as JSON-based .pen files with themes, variables, components, and layouts. Includes CLI tools for reading, searching, editing, and validating .pen files without requiring the Pencil desktop app.
-license: MIT
-metadata:
-  author: denovo
-  version: "1.0"
-  pencil-schema-version: "2.8"
-compatibility: Requires Node.js 18+. Pencil desktop app optional for visual preview only.
+description: Create and edit Pencil (.pen) design files programmatically. Generate UI designs as JSON-based .pen files with themes, variables, components, and layouts. Includes CLI tools for reading, searching, editing, and validating .pen files without requiring the Pencil desktop app. Requires Node.js 18+. Schema version 2.8.
 ---
 
 # pencil-skill

@@ -72,7 +72,13 @@ export interface FillImage {
   mode?: 'stretch' | 'fill' | 'fit';
 }
 
-export type Fill = ColorOrVariable | FillColor | FillGradient | FillImage;
+export interface FillMeshGradient {
+  type: 'mesh_gradient';
+  enabled?: BooleanOrVariable;
+  blendMode?: BlendMode;
+}
+
+export type Fill = ColorOrVariable | FillColor | FillGradient | FillImage | FillMeshGradient;
 
 export interface Stroke {
   align?: 'inside' | 'center' | 'outside';

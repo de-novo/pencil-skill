@@ -32,7 +32,7 @@ Plain text requires a contrast ratio of **4.5:1 or higher** compared to the back
       "type": "text",
       "id": "price",
       "fontWeight": "$font.weight.bold",
-      "content": "₩29,000",
+      "content": "$29.00",
       "fill": "#9CA3AF",
       "fontSize": "$font.size.lg"
     }
@@ -65,7 +65,7 @@ Plain text requires a contrast ratio of **4.5:1 or higher** compared to the back
       "type": "text",
       "id": "price",
       "fontWeight": "$font.weight.bold",
-      "content": "₩29,000",
+      "content": "$29.00",
       "fill": "$color.foreground",
       "fontSize": "$font.size.lg",
       "textGrowth": "auto",

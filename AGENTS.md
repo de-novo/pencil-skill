@@ -743,7 +743,7 @@ Plain text requires a contrast ratio of **4.5:1 or higher** compared to the back
       "type": "text",
       "id": "price",
       "fontWeight": "$font.weight.bold",
-      "content": "₩29,000",
+      "content": "$29.00",
       "fill": "#9CA3AF",
       "fontSize": "$font.size.lg"
     }
@@ -776,7 +776,7 @@ Plain text requires a contrast ratio of **4.5:1 or higher** compared to the back
       "type": "text",
       "id": "price",
       "fontWeight": "$font.weight.bold",
-      "content": "₩29,000",
+      "content": "$29.00",
       "fill": "$color.foreground",
       "fontSize": "$font.size.lg",
       "textGrowth": "auto",
@@ -2906,7 +2906,7 @@ Creating a new card immediately without search-nodes
     {
       "type": "text",
       "id": "card-price",
-      "content": "₩29,000",
+      "content": "$29.00",
       "fontSize": 16
     },
     {
@@ -2948,7 +2948,7 @@ Step 2: Found `card-product` in search results → create instance via `ref`
         "content": "Product Name"
       },
       "card-price": {
-        "content": "₩29,000"
+        "content": "$29.00"
       },
       "cta-btn": {
         "type": "ref",
