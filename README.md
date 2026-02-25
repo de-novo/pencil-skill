@@ -23,7 +23,7 @@ node scripts/search-nodes.mjs mydesign.pen --name "button"
 
 # Get/set design variables
 node scripts/get-variables.mjs mydesign.pen
-node scripts/set-variables.mjs mydesign.pen --var 'color.primary=color:#3B82F6'
+node scripts/set-variables.mjs mydesign.pen --var 'color.primary=color:#0D9488'
 
 # Batch operations
 node scripts/batch-design.mjs mydesign.pen --ops '[{"op":"update","id":"node1","props":{"name":"Header"}}]'

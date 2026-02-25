@@ -482,7 +482,7 @@
             {
               "type": "text",
               "id": "post-community",
-              "content": "r/koreanstartup · 2h ago",
+              "content": "r/startups · 2h ago",
               "textGrowth": "auto",
               "fontSize": "$font.size.xs",
               "fontFamily": "$font.family.body",
@@ -683,7 +683,7 @@
                   "ref": "post-card",
                   "descendants": {
                     "post-community": {
-                      "content": "r/startup_kr · 58m ago"
+                      "content": "r/entrepreneur · 58m ago"
                     },
                     "post-vote/vote-count": {
                       "content": "2.8K"
@@ -728,7 +728,7 @@
                   "ref": "post-card",
                   "descendants": {
                     "post-community": {
-                      "content": "r/devops_kr · 1h ago"
+                      "content": "r/devops · 1h ago"
                     },
                     "post-vote/vote-count": {
                       "content": "943"
@@ -842,7 +842,7 @@
                     {
                       "type": "text",
                       "id": "light-info-title",
-                      "content": "About r/startup_kr",
+                      "content": "About r/entrepreneur",
                       "textGrowth": "auto",
                       "fontSize": "$font.size.md",
                       "fontFamily": "$font.family.display",

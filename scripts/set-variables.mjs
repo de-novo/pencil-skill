@@ -82,4 +82,5 @@ for (const vexpr of vars) {
 
 backupPen(file);
 savePen(file, pen);
-process.stdout.write(`OK: updated themes(${themes.length}) variables(${vars.length})\n`);
+const totalThemeValues = Object.values(pen.themes).reduce((sum, arr) => sum + arr.length, 0);
+process.stdout.write(`OK: updated themes(${Object.keys(pen.themes).length} axes, ${totalThemeValues} values) variables(${vars.length})\n`);
