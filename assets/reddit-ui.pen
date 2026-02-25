@@ -1,0 +1,1255 @@
+{
+  "version": "2.8",
+  "themes": {
+    "mode": [
+      "light",
+      "dark"
+    ]
+  },
+  "variables": {
+    "color.primary": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#FF5A1F"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#FF6A33"
+        }
+      ]
+    },
+    "color.surface": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#FFFFFF"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#1A1D22"
+        }
+      ]
+    },
+    "color.foreground": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#111418"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#EEF2F7"
+        }
+      ]
+    },
+    "color.muted": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#636D7A"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#A3AEBC"
+        }
+      ]
+    },
+    "color.border": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#D8DEE8"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#343B47"
+        }
+      ]
+    },
+    "color.upvote": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#FF4500"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#FF6A33"
+        }
+      ]
+    },
+    "color.downvote": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#5C6CFF"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#7A88FF"
+        }
+      ]
+    },
+    "color.shadow": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#11141814"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#00000052"
+        }
+      ]
+    },
+    "space.xs": {
+      "type": "number",
+      "value": 4
+    },
+    "space.sm": {
+      "type": "number",
+      "value": 8
+    },
+    "space.md": {
+      "type": "number",
+      "value": 12
+    },
+    "space.lg": {
+      "type": "number",
+      "value": 16
+    },
+    "space.xl": {
+      "type": "number",
+      "value": 24
+    },
+    "space.section": {
+      "type": "number",
+      "value": 32
+    },
+    "radius.sm": {
+      "type": "number",
+      "value": 6
+    },
+    "radius.md": {
+      "type": "number",
+      "value": 10
+    },
+    "radius.lg": {
+      "type": "number",
+      "value": 14
+    },
+    "font.size.xs": {
+      "type": "number",
+      "value": 12
+    },
+    "font.size.sm": {
+      "type": "number",
+      "value": 14
+    },
+    "font.size.md": {
+      "type": "number",
+      "value": 16
+    },
+    "font.size.lg": {
+      "type": "number",
+      "value": 20
+    },
+    "font.size.xl": {
+      "type": "number",
+      "value": 28
+    },
+    "font.weight.regular": {
+      "type": "string",
+      "value": "400"
+    },
+    "font.weight.medium": {
+      "type": "string",
+      "value": "500"
+    },
+    "font.weight.semibold": {
+      "type": "string",
+      "value": "600"
+    },
+    "font.weight.bold": {
+      "type": "string",
+      "value": "700"
+    },
+    "font.family.body": {
+      "type": "string",
+      "value": "Source Sans 3"
+    },
+    "font.family.display": {
+      "type": "string",
+      "value": "Fraunces"
+    }
+  },
+  "children": [
+    {
+      "type": "frame",
+      "id": "vote-button",
+      "name": "VoteButton/Default",
+      "reusable": true,
+      "layout": "vertical",
+      "gap": "$space.xs",
+      "padding": [
+        "$space.sm",
+        "$space.sm",
+        "$space.sm",
+        "$space.sm"
+      ],
+      "alignItems": "center",
+      "cornerRadius": "$radius.md",
+      "fill": "$color.surface",
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "$color.border"
+      },
+      "children": [
+        {
+          "type": "icon_font",
+          "id": "vote-up-icon",
+          "iconFontFamily": "lucide",
+          "iconFontName": "chevron-up",
+          "width": 16,
+          "height": 16,
+          "fill": "$color.muted"
+        },
+        {
+          "type": "text",
+          "id": "vote-count",
+          "content": "1.2K",
+          "textGrowth": "auto",
+          "fontSize": "$font.size.sm",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.semibold",
+          "fill": "$color.foreground"
+        },
+        {
+          "type": "icon_font",
+          "id": "vote-down-icon",
+          "iconFontFamily": "lucide",
+          "iconFontName": "chevron-down",
+          "width": 16,
+          "height": 16,
+          "fill": "$color.muted"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "sidebar-item",
+      "name": "SidebarItem/Default",
+      "reusable": true,
+      "layout": "horizontal",
+      "gap": "$space.sm",
+      "padding": [
+        "$space.sm",
+        "$space.sm",
+        "$space.sm",
+        "$space.sm"
+      ],
+      "alignItems": "center",
+      "width": "fill_container",
+      "cornerRadius": "$radius.sm",
+      "fill": "$color.surface",
+      "children": [
+        {
+          "type": "icon_font",
+          "id": "sidebar-item-icon",
+          "iconFontFamily": "lucide",
+          "iconFontName": "hash",
+          "width": 14,
+          "height": 14,
+          "fill": "$color.muted"
+        },
+        {
+          "type": "text",
+          "id": "sidebar-item-label",
+          "content": "r/korea",
+          "textGrowth": "auto",
+          "fontSize": "$font.size.sm",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.medium",
+          "fill": "$color.foreground"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "navbar",
+      "name": "NavBar/Main",
+      "reusable": true,
+      "layout": "horizontal",
+      "justifyContent": "space_between",
+      "alignItems": "center",
+      "padding": [
+        "$space.md",
+        "$space.section",
+        "$space.md",
+        "$space.section"
+      ],
+      "width": "fill_container",
+      "fill": "$color.surface",
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "$color.border"
+      },
+      "children": [
+        {
+          "type": "frame",
+          "id": "navbar-left",
+          "layout": "horizontal",
+          "gap": "$space.md",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "navbar-logo",
+              "content": "reddot",
+              "textGrowth": "auto",
+              "fontSize": "$font.size.lg",
+              "fontFamily": "$font.family.display",
+              "fontWeight": "$font.weight.bold",
+              "fill": "$color.primary"
+            },
+            {
+              "type": "frame",
+              "id": "navbar-search",
+              "layout": "horizontal",
+              "gap": "$space.sm",
+              "alignItems": "center",
+              "padding": [
+                "$space.sm",
+                "$space.md",
+                "$space.sm",
+                "$space.md"
+              ],
+              "width": 360,
+              "cornerRadius": "$radius.lg",
+              "fill": "$color.surface",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$color.border"
+              },
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "navbar-search-icon",
+                  "iconFontFamily": "lucide",
+                  "iconFontName": "search",
+                  "width": 14,
+                  "height": 14,
+                  "fill": "$color.muted"
+                },
+                {
+                  "type": "text",
+                  "id": "navbar-search-text",
+                  "content": "Search communities you care about",
+                  "textGrowth": "auto",
+                  "fontSize": "$font.size.sm",
+                  "fontFamily": "$font.family.body",
+                  "fontWeight": "$font.weight.regular",
+                  "fill": "$color.muted"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "navbar-right",
+          "layout": "horizontal",
+          "gap": "$space.md",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "navbar-bell",
+              "iconFontFamily": "lucide",
+              "iconFontName": "bell",
+              "width": 18,
+              "height": 18,
+              "fill": "$color.muted"
+            },
+            {
+              "type": "text",
+              "id": "navbar-login",
+              "content": "Log in",
+              "textGrowth": "auto",
+              "fontSize": "$font.size.sm",
+              "fontFamily": "$font.family.body",
+              "fontWeight": "$font.weight.semibold",
+              "fill": "$color.foreground"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "post-card",
+      "name": "PostCard/Default",
+      "reusable": true,
+      "layout": "vertical",
+      "gap": "$space.md",
+      "padding": [
+        "$space.lg",
+        "$space.lg",
+        "$space.lg",
+        "$space.lg"
+      ],
+      "width": "fill_container",
+      "cornerRadius": "$radius.lg",
+      "fill": "$color.surface",
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "$color.border"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "offset": {
+          "x": 0,
+          "y": 4
+        },
+        "blur": 16,
+        "spread": 0,
+        "color": "$color.shadow"
+      },
+      "slot": [
+        "post-body"
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "post-head",
+          "layout": "horizontal",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "width": "fill_container",
+          "children": [
+            {
+              "type": "text",
+              "id": "post-community",
+              "content": "r/koreanstartup · 2h ago",
+              "textGrowth": "auto",
+              "fontSize": "$font.size.xs",
+              "fontFamily": "$font.family.body",
+              "fontWeight": "$font.weight.medium",
+              "fill": "$color.muted"
+            },
+            {
+              "type": "icon_font",
+              "id": "post-more",
+              "iconFontFamily": "lucide",
+              "iconFontName": "ellipsis",
+              "width": 14,
+              "height": 14,
+              "fill": "$color.muted"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "post-main-row",
+          "layout": "horizontal",
+          "gap": "$space.md",
+          "width": "fill_container",
+          "children": [
+            {
+              "type": "ref",
+              "id": "post-vote",
+              "ref": "vote-button"
+            },
+            {
+              "type": "frame",
+              "id": "post-slot-container",
+              "name": "post-body",
+              "layout": "vertical",
+              "gap": "$space.sm",
+              "width": "fill_container",
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "post-actions",
+          "layout": "horizontal",
+          "gap": "$space.lg",
+          "children": [
+            {
+              "type": "text",
+              "id": "post-comments",
+              "content": "42 comments",
+              "textGrowth": "auto",
+              "fontSize": "$font.size.sm",
+              "fontFamily": "$font.family.body",
+              "fontWeight": "$font.weight.medium",
+              "fill": "$color.muted"
+            },
+            {
+              "type": "text",
+              "id": "post-share",
+              "content": "Share",
+              "textGrowth": "auto",
+              "fontSize": "$font.size.sm",
+              "fontFamily": "$font.family.body",
+              "fontWeight": "$font.weight.medium",
+              "fill": "$color.muted"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "reddit-showcase-light",
+      "name": "Showcase/RedditLight",
+      "theme": {
+        "mode": "light"
+      },
+      "layout": "vertical",
+      "gap": 0,
+      "width": 1440,
+      "height": "fit_content",
+      "fill": "$color.surface",
+      "children": [
+        {
+          "type": "ref",
+          "id": "light-navbar-instance",
+          "ref": "navbar"
+        },
+        {
+          "type": "frame",
+          "id": "light-content-wrap",
+          "layout": "horizontal",
+          "gap": "$space.section",
+          "padding": [
+            "$space.section",
+            "$space.section",
+            "$space.section",
+            "$space.section"
+          ],
+          "alignItems": "start",
+          "width": "fill_container",
+          "children": [
+            {
+              "type": "frame",
+              "id": "light-left-sidebar",
+              "layout": "vertical",
+              "gap": "$space.md",
+              "width": 200,
+              "height": "fit_content",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "light-left-title",
+                  "content": "My communities",
+                  "textGrowth": "auto",
+                  "fontSize": "$font.size.sm",
+                  "fontFamily": "$font.family.body",
+                  "fontWeight": "$font.weight.semibold",
+                  "fill": "$color.foreground"
+                },
+                {
+                  "type": "ref",
+                  "id": "light-community-item-1",
+                  "ref": "sidebar-item",
+                  "descendants": {
+                    "sidebar-item-icon": {
+                      "iconFontName": "circle-dot"
+                    },
+                    "sidebar-item-label": {
+                      "content": "r/korea"
+                    }
+                  }
+                },
+                {
+                  "type": "ref",
+                  "id": "light-community-item-2",
+                  "ref": "sidebar-item",
+                  "descendants": {
+                    "sidebar-item-icon": {
+                      "iconFontName": "flame"
+                    },
+                    "sidebar-item-label": {
+                      "content": "r/programming"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "light-topic-title",
+                  "content": "Popular topics",
+                  "textGrowth": "auto",
+                  "fontSize": "$font.size.sm",
+                  "fontFamily": "$font.family.body",
+                  "fontWeight": "$font.weight.semibold",
+                  "fill": "$color.foreground"
+                },
+                {
+                  "type": "ref",
+                  "id": "light-topic-item-1",
+                  "ref": "sidebar-item",
+                  "descendants": {
+                    "sidebar-item-icon": {
+                      "iconFontName": "trending-up"
+                    },
+                    "sidebar-item-label": {
+                      "content": "#ThreadRecommendations"
+                    }
+                  }
+                },
+                {
+                  "type": "ref",
+                  "id": "light-topic-item-2",
+                  "ref": "sidebar-item",
+                  "descendants": {
+                    "sidebar-item-icon": {
+                      "iconFontName": "sparkles"
+                    },
+                    "sidebar-item-label": {
+                      "content": "#DeveloperCareer"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "light-feed-column",
+              "layout": "vertical",
+              "gap": "$space.lg",
+              "width": "fill_container",
+              "height": "fit_content",
+              "children": [
+                {
+                  "type": "ref",
+                  "id": "light-post-1",
+                  "ref": "post-card",
+                  "descendants": {
+                    "post-community": {
+                      "content": "r/startup_kr · 58m ago"
+                    },
+                    "post-vote/vote-count": {
+                      "content": "2.8K"
+                    },
+                    "post-vote/vote-up-icon": {
+                      "fill": "$color.upvote"
+                    },
+                    "post-vote/vote-down-icon": {
+                      "fill": "$color.downvote"
+                    },
+                    "post-comments": {
+                      "content": "187 comments"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "light-post-1-title",
+                      "content": "Sharing how I made 3M KRW/month from a side project without quitting my job",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-post-1-preview",
+                      "content": "For the first six weeks, we spent two hours each evening only on customer interviews, and payment conversion was determined by A/B testing three landing copy variants.",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "ref",
+                  "id": "light-post-2",
+                  "ref": "post-card",
+                  "descendants": {
+                    "post-community": {
+                      "content": "r/devops_kr · 1h ago"
+                    },
+                    "post-vote/vote-count": {
+                      "content": "943"
+                    },
+                    "post-vote/vote-up-icon": {
+                      "fill": "$color.upvote"
+                    },
+                    "post-comments": {
+                      "content": "64 comments"
+                    },
+                    "post-share": {
+                      "content": "Copy link"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "light-post-2-title",
+                      "content": "Sharing our cluster autoscaling setup that cut Kubernetes costs by 37%",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-post-2-preview",
+                      "content": "We split node pools by service tier and moved batch workloads to spot instances at night, significantly reducing monthly costs.",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "ref",
+                  "id": "light-post-3",
+                  "ref": "post-card",
+                  "descendants": {
+                    "post-community": {
+                      "content": "r/designteam · 2h ago"
+                    },
+                    "post-vote/vote-count": {
+                      "content": "1.4K"
+                    },
+                    "post-vote/vote-up-icon": {
+                      "fill": "$color.upvote"
+                    },
+                    "post-comments": {
+                      "content": "91 comments"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "light-post-3-title",
+                      "content": "Free user interview note template (practical edition)",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-post-3-preview",
+                      "content": "A template that organizes question flow, observation points, and follow-up tagging all at once. Both PMs and designers can use it right away.",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "light-right-sidebar",
+              "layout": "vertical",
+              "gap": "$space.lg",
+              "width": 280,
+              "height": "fit_content",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "light-community-info",
+                  "layout": "vertical",
+                  "gap": "$space.sm",
+                  "padding": [
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg"
+                  ],
+                  "cornerRadius": "$radius.lg",
+                  "fill": "$color.surface",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "light-info-title",
+                      "content": "About r/startup_kr",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-info-desc",
+                      "content": "A community for sharing stories about Korean startup operations, hiring, and product growth.",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "light-rules-card",
+                  "layout": "vertical",
+                  "gap": "$space.sm",
+                  "padding": [
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg"
+                  ],
+                  "cornerRadius": "$radius.lg",
+                  "fill": "$color.surface",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "light-rules-title",
+                      "content": "Rules",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-rule-1",
+                      "content": "1) Self-promotion is allowed once per week",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-rule-2",
+                      "content": "2) Job posts must include a salary range",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "light-trending-card",
+                  "layout": "vertical",
+                  "gap": "$space.sm",
+                  "padding": [
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg"
+                  ],
+                  "cornerRadius": "$radius.lg",
+                  "fill": "$color.surface",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "light-trending-title",
+                      "content": "Live trending",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-trending-item-1",
+                      "content": "• AI PM job openings roundup",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.medium",
+                      "fill": "$color.muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "light-trending-item-2",
+                      "content": "• Translated YC batch retrospectives",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.medium",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "reddit-showcase-dark",
+      "name": "Showcase/RedditDark",
+      "theme": {
+        "mode": "dark"
+      },
+      "layout": "vertical",
+      "gap": 0,
+      "width": 1440,
+      "height": "fit_content",
+      "fill": "$color.surface",
+      "children": [
+        {
+          "type": "ref",
+          "id": "dark-navbar-instance",
+          "ref": "navbar",
+          "descendants": {
+            "navbar-search-text": {
+              "content": "Search discussions in dark mode"
+            },
+            "navbar-login": {
+              "content": "Profile"
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "dark-content-wrap",
+          "layout": "horizontal",
+          "gap": "$space.section",
+          "padding": [
+            "$space.section",
+            "$space.section",
+            "$space.section",
+            "$space.section"
+          ],
+          "alignItems": "start",
+          "width": "fill_container",
+          "children": [
+            {
+              "type": "frame",
+              "id": "dark-left-sidebar",
+              "layout": "vertical",
+              "gap": "$space.md",
+              "width": 200,
+              "height": "fit_content",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "dark-left-title",
+                  "content": "Favorite spaces",
+                  "textGrowth": "auto",
+                  "fontSize": "$font.size.sm",
+                  "fontFamily": "$font.family.body",
+                  "fontWeight": "$font.weight.semibold",
+                  "fill": "$color.foreground"
+                },
+                {
+                  "type": "ref",
+                  "id": "dark-community-item-1",
+                  "ref": "sidebar-item",
+                  "descendants": {
+                    "sidebar-item-icon": {
+                      "iconFontName": "gamepad-2"
+                    },
+                    "sidebar-item-label": {
+                      "content": "r/gamedev"
+                    }
+                  }
+                },
+                {
+                  "type": "ref",
+                  "id": "dark-community-item-2",
+                  "ref": "sidebar-item",
+                  "descendants": {
+                    "sidebar-item-icon": {
+                      "iconFontName": "terminal-square"
+                    },
+                    "sidebar-item-label": {
+                      "content": "r/linux_kr"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "dark-feed-column",
+              "layout": "vertical",
+              "gap": "$space.lg",
+              "width": "fill_container",
+              "height": "fit_content",
+              "children": [
+                {
+                  "type": "ref",
+                  "id": "dark-post-1",
+                  "ref": "post-card",
+                  "descendants": {
+                    "post-community": {
+                      "content": "r/gamedev · 31m ago"
+                    },
+                    "post-vote/vote-count": {
+                      "content": "3.1K"
+                    },
+                    "post-vote/vote-up-icon": {
+                      "fill": "$color.upvote"
+                    },
+                    "post-comments": {
+                      "content": "208 comments"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dark-post-1-title",
+                      "content": "Day 4 after indie game launch: analysis of wishlist-to-revenue conversion segments",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dark-post-1-preview",
+                      "content": "Exposure from two streamers right after launch improved conversion, and a patch that shortened tutorial length by 40% had the biggest impact on retention.",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "ref",
+                  "id": "dark-post-2",
+                  "ref": "post-card",
+                  "descendants": {
+                    "post-community": {
+                      "content": "r/cloudnative · 47m ago"
+                    },
+                    "post-vote/vote-count": {
+                      "content": "1.1K"
+                    },
+                    "post-vote/vote-up-icon": {
+                      "fill": "$color.upvote"
+                    },
+                    "post-vote/vote-down-icon": {
+                      "fill": "$color.downvote"
+                    },
+                    "post-comments": {
+                      "content": "73 comments"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dark-post-2-title",
+                      "content": "Redis outage postmortem: 18-minute downtime caused by failover misconfiguration",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dark-post-2-preview",
+                      "content": "A misconfigured Sentinel quorum caused split-brain. We also documented detection alerts and a reproducible test scenario.",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "dark-right-sidebar",
+              "layout": "vertical",
+              "gap": "$space.lg",
+              "width": 280,
+              "height": "fit_content",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dark-community-info",
+                  "layout": "vertical",
+                  "gap": "$space.sm",
+                  "padding": [
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg"
+                  ],
+                  "cornerRadius": "$radius.lg",
+                  "fill": "$color.surface",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dark-info-title",
+                      "content": "Today's community snapshot",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dark-info-desc",
+                      "content": "8,942 active users · 126 new posts · 2 upcoming AMAs",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.regular",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dark-trending-card",
+                  "layout": "vertical",
+                  "gap": "$space.sm",
+                  "padding": [
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg",
+                    "$space.lg"
+                  ],
+                  "cornerRadius": "$radius.lg",
+                  "fill": "$color.surface",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dark-trending-title",
+                      "content": "Night trending",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.md",
+                      "fontFamily": "$font.family.display",
+                      "fontWeight": "$font.weight.semibold",
+                      "fill": "$color.foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dark-trending-item-1",
+                      "content": "• Open-source retrospective templates",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.medium",
+                      "fill": "$color.muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dark-trending-item-2",
+                      "content": "• Serverless cost optimization",
+                      "textGrowth": "auto",
+                      "fontSize": "$font.size.sm",
+                      "fontFamily": "$font.family.body",
+                      "fontWeight": "$font.weight.medium",
+                      "fill": "$color.muted"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

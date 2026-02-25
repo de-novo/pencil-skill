@@ -1,0 +1,284 @@
+{
+  "version": "2.8",
+  "themes": {
+    "mode": [
+      "light",
+      "dark"
+    ]
+  },
+  "variables": {
+    "color.surface": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#FFFFFF"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#111827"
+        }
+      ]
+    },
+    "color.border": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#E5E7EB"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#374151"
+        }
+      ]
+    },
+    "color.foreground": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#111827"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#F9FAFB"
+        }
+      ]
+    },
+    "space.card.padding": {
+      "type": "number",
+      "value": 16
+    },
+    "space.md": {
+      "type": "number",
+      "value": 12
+    },
+    "radius.card": {
+      "type": "number",
+      "value": 12
+    },
+    "font.size.lg": {
+      "type": "number",
+      "value": 18
+    },
+    "font.size.sm": {
+      "type": "number",
+      "value": 14
+    },
+    "font.weight.bold": {
+      "type": "string",
+      "value": "700"
+    },
+    "font.weight.medium": {
+      "type": "string",
+      "value": "500"
+    },
+    "color.shadow": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#0000001A"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#0000004D"
+        }
+      ]
+    },
+    "space.sm": {
+      "type": "number",
+      "value": 8
+    },
+    "font.family.display": {
+      "type": "string",
+      "value": "Playfair Display"
+    },
+    "font.family.body": {
+      "type": "string",
+      "value": "Source Sans 3"
+    },
+    "color.muted": {
+      "type": "color",
+      "value": [
+        {
+          "theme": {
+            "mode": "light"
+          },
+          "value": "#6B7280"
+        },
+        {
+          "theme": {
+            "mode": "dark"
+          },
+          "value": "#9CA3AF"
+        }
+      ]
+    },
+    "font.weight.regular": {
+      "type": "string",
+      "value": "400"
+    },
+    "size.card.width": {
+      "type": "number",
+      "value": 320
+    },
+    "effect.shadow.blur": {
+      "type": "number",
+      "value": 24
+    },
+    "effect.shadow.spread": {
+      "type": "number",
+      "value": 0
+    },
+    "effect.shadow.offset.x": {
+      "type": "number",
+      "value": 0
+    },
+    "effect.shadow.offset.y": {
+      "type": "number",
+      "value": 8
+    },
+    "stroke.thickness.default": {
+      "type": "number",
+      "value": 1
+    }
+  },
+  "children": [
+    {
+      "type": "frame",
+      "id": "card-component",
+      "name": "Card",
+      "reusable": true,
+      "layout": "vertical",
+      "gap": "$space.md",
+      "padding": "$space.card.padding",
+      "width": "$size.card.width",
+      "height": "fit_content",
+      "cornerRadius": "$radius.card",
+      "fill": "$color.surface",
+      "stroke": {
+        "align": "inside",
+        "thickness": "$stroke.thickness.default",
+        "fill": "$color.border"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "offset": {
+          "x": "$effect.shadow.offset.x",
+          "y": "$effect.shadow.offset.y"
+        },
+        "blur": "$effect.shadow.blur",
+        "spread": "$effect.shadow.spread",
+        "color": "$color.shadow"
+      },
+      "slot": [
+        "body"
+      ],
+      "children": [
+        {
+          "type": "text",
+          "id": "card-title",
+          "textGrowth": "auto",
+          "content": "Card Title",
+          "fontSize": "$font.size.lg",
+          "fontWeight": "$font.weight.bold",
+          "fill": "$color.foreground",
+          "fontFamily": "$font.family.display"
+        },
+        {
+          "type": "frame",
+          "id": "card-body",
+          "name": "body",
+          "layout": "vertical",
+          "gap": "$space.sm",
+          "width": "fill_container",
+          "height": "fit_content",
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "ref",
+      "id": "card-instance-1",
+      "ref": "card-component",
+      "x": 40,
+      "y": 40,
+      "theme": {
+        "mode": "light"
+      },
+      "descendants": {
+        "card-title": {
+          "content": "Daily Metrics"
+        }
+      },
+      "children": [
+        {
+          "type": "text",
+          "id": "metric-line-1",
+          "textGrowth": "auto",
+          "content": "Revenue: $12,400",
+          "fontSize": "$font.size.sm",
+          "fontWeight": "$font.weight.medium",
+          "fill": "$color.foreground",
+          "fontFamily": "$font.family.body"
+        },
+        {
+          "type": "text",
+          "id": "metric-line-2",
+          "textGrowth": "auto",
+          "content": "Conversion: 4.2%",
+          "fontSize": "$font.size.sm",
+          "fill": "$color.muted",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.regular"
+        }
+      ]
+    },
+    {
+      "type": "ref",
+      "id": "card-instance-2",
+      "ref": "card-component",
+      "x": 40,
+      "y": 240,
+      "theme": {
+        "mode": "dark"
+      },
+      "descendants": {
+        "card-title": {
+          "content": "System Health"
+        }
+      },
+      "children": [
+        {
+          "type": "text",
+          "id": "health-line-1",
+          "textGrowth": "auto",
+          "content": "API latency: 120ms",
+          "fontSize": "$font.size.sm",
+          "fill": "$color.muted",
+          "fontFamily": "$font.family.body",
+          "fontWeight": "$font.weight.medium"
+        }
+      ]
+    }
+  ]
+}

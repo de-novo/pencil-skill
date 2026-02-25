@@ -1,0 +1,8 @@
+{
+  "name": "pencil-skill",
+  "version": "1.0.0",
+  "description": "Agent Skill for creating and editing Pencil (.pen) design files",
+  "license": "MIT",
+  "author": "denovo",
+  "keywords": ["agent-skill", "pencil", "design", "pen"]
+}
