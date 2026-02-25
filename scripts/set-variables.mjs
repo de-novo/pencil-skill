@@ -59,6 +59,21 @@ for (const vexpr of vars) {
       const axis = axes.find((a) => (pen.themes[a] || []).includes(themeValue)) || (axes[0] || 'mode');
       return { theme: { [axis]: themeValue }, value };
     });
+
+    // Ensure theme axis and values exist in pen.themes
+    for (const tv of themedValues) {
+      if (tv.theme) {
+        for (const [axis, val] of Object.entries(tv.theme)) {
+          if (!pen.themes[axis]) {
+            pen.themes[axis] = [];
+          }
+          if (!pen.themes[axis].includes(val)) {
+            pen.themes[axis].push(val);
+          }
+        }
+      }
+    }
+
     pen.variables[name] = { type, value: themedValues };
   } else {
     pen.variables[name] = { type, value: parseTypedValue(type, rawValue) };

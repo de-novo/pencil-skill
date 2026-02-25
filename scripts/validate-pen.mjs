@@ -100,4 +100,25 @@ function validateRefs(node, p='root') {
 
 data.children.forEach((n, i) => validateRefs(n, `children[${i}]`));
 
+
+// Theme consistency check
+const themes = data.themes || {};
+const variables = data.variables || {};
+for (const [varName, varDef] of Object.entries(variables)) {
+  if (Array.isArray(varDef.value)) {
+    for (const entry of varDef.value) {
+      if (entry.theme) {
+        for (const [axis, val] of Object.entries(entry.theme)) {
+          if (!themes[axis]) {
+            warn(`Variable "${varName}" references undeclared theme axis "${axis}"`);
+          } else if (!themes[axis].includes(val)) {
+            warn(`Variable "${varName}" references undeclared theme value "${axis}:${val}"`);
+          }
+        }
+      }
+    }
+  }
+}
+
+
 console.log(`✅ validate-pen pass: ${file}`);

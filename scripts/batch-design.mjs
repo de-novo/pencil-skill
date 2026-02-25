@@ -130,7 +130,8 @@ for (let i = 0; i < ops.length; i += 1) {
         if (node.descendants) {
           const newDescendants = {};
           for (const [key, val] of Object.entries(node.descendants)) {
-            newDescendants[`${prefix}-${key}`] = val;
+            const prefixedKey = key.split('/').map(seg => `${prefix}-${seg}`).join('/');
+            newDescendants[prefixedKey] = val;
           }
           node.descendants = newDescendants;
         }
