@@ -1,26 +1,48 @@
 # pencil-skill
 
-Agent Skill for creating and editing Pencil (.pen) design files.
+Agent Skill for creating and editing Pencil (`.pen`) design files programmatically.
 
 ## Installation
 
 ```bash
-npx skillsadd <owner>/pencil-skill
+npx skillsadd denovo/pencil-skill
 ```
 
-## Features
+## Quick Start
 
-- CLI tools for creating, validating, and editing `.pen` design files.
-- 41 design rules for consistent, production-ready UI mockups.
-- Schema v2.8 support for safe and compatible file generation.
-- Built-in light and dark theme patterns.
+```bash
+# Validate a .pen file
+node scripts/validate-pen.mjs mydesign.pen
 
-## File Structure
+# Read document tree
+node scripts/read-tree.mjs mydesign.pen
 
-- `SKILL.md` — main skill instructions and workflow.
-- `scripts/` — helper scripts for validation and automation.
-- `assets/` — sample `.pen` files and references.
-- `rules/` — design rule definitions and constraints.
+# Search for nodes by type or name
+node scripts/search-nodes.mjs mydesign.pen --type text
+node scripts/search-nodes.mjs mydesign.pen --query "button"
+
+# Get/set design variables
+node scripts/get-variables.mjs mydesign.pen
+node scripts/set-variables.mjs mydesign.pen --var 'color.primary' --value '#3B82F6'
+
+# Batch operations
+node scripts/batch-design.mjs mydesign.pen --ops '[{"op":"rename","id":"node1","name":"Header"}]'
+
+# Find available space for new elements
+node scripts/find-space.mjs mydesign.pen --width 200 --height 100
+```
+
+## What's Inside
+
+- **SKILL.md** — Complete skill instructions and workflow for AI agents
+- **scripts/** — 9 CLI tools for .pen file manipulation
+- **rules/** — 41 design rules for production-quality UI output
+- **references/** — Schema (JSON + TypeScript), Tailwind mappings, component patterns
+- **assets/** — Example `.pen` files (card component, Reddit UI clone)
+
+## Documentation
+
+See [SKILL.md](SKILL.md) for the full agent skill specification.
 
 ## License
 

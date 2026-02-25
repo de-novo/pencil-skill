@@ -4,10 +4,27 @@
   "description": "Agent Skill for creating and editing Pencil (.pen) design files",
   "license": "MIT",
   "author": "denovo",
-  "keywords": ["agent-skill", "pencil", "design", "pen"],
-  "files": ["SKILL.md", "AGENTS.md", "scripts/", "references/", "rules/", "assets/", "README.md", "LICENSE"],
+  "keywords": [
+    "agent-skill",
+    "pencil",
+    "design",
+    "pen"
+  ],
+  "files": [
+    "SKILL.md",
+    "AGENTS.md",
+    "scripts/",
+    "references/",
+    "rules/",
+    "assets/",
+    "README.md",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/denovo/pencil-skill.git"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
