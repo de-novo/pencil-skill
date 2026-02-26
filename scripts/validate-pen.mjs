@@ -11,6 +11,9 @@ const ALLOWED = new Set([
   'rectangle','ellipse','line','polygon','path','text','frame','group','note','prompt','context','icon_font','ref'
 ]);
 
+// _PRIVATE schema node types intentionally excluded from public authoring/type unions.
+const PRIVATE_TYPES = new Set(['connection']);
+
 function warn(msg){ console.log(`⚠️ ${msg}`); }
 
 const data = loadPen(file);
@@ -46,7 +49,15 @@ function collectVariablesFromValue(value, path) {
 function walk(node, p='root', parent=null) {
   if (typeof node !== 'object' || node === null) fail(`${p} must be object`);
 
-  if (node.type && !ALLOWED.has(node.type)) warn(`${p} unknown type: ${node.type}`);
+  if (node.type && !ALLOWED.has(node.type) && !PRIVATE_TYPES.has(node.type)) {
+    warn(`${p} unknown type: ${node.type}`);
+  }
+
+  for (const [plural, singular] of [['fills', 'fill'], ['strokes', 'stroke'], ['effects', 'effect']]) {
+    if (plural in node) {
+      warn(`${p} uses non-canonical property "${plural}"; use "${singular}"`);
+    }
+  }
 
   if (typeof node.id !== 'string' || !node.id.trim()) {
     fail(`${p}.id must be non-empty string`);

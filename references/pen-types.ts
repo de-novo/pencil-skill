@@ -1,5 +1,7 @@
 // TypeScript definitions for .pen format (derived from pen-schema.json)
 
+// Note: Schema _PRIVATE types (e.g. `connection`) and top-level _PRIVATE keys (`fonts`, `imports`)
+// are intentionally excluded from this public authoring node union.
 export type PenNodeType =
   | 'rectangle'
   | 'ellipse'
@@ -72,10 +74,25 @@ export interface FillImage {
   mode?: 'stretch' | 'fill' | 'fit';
 }
 
+export type MeshPoint =
+  | [number, number]
+  | {
+      position: [number, number];
+      leftHandle?: [number, number];
+      rightHandle?: [number, number];
+      topHandle?: [number, number];
+      bottomHandle?: [number, number];
+    };
+
 export interface FillMeshGradient {
   type: 'mesh_gradient';
   enabled?: BooleanOrVariable;
   blendMode?: BlendMode;
+  opacity?: NumberOrVariable;
+  columns?: number;
+  rows?: number;
+  colors?: ColorOrVariable[];
+  points?: MeshPoint[];
 }
 
 export type Fill = ColorOrVariable | FillColor | FillGradient | FillImage | FillMeshGradient;
@@ -157,11 +174,8 @@ export interface PenNode extends LayoutProps {
   flipX?: BooleanOrVariable;
   flipY?: BooleanOrVariable;
   cornerRadius?: NumberOrVariable | [NumberOrVariable, NumberOrVariable, NumberOrVariable, NumberOrVariable];
-  fills?: Fill | Fill[];
   fill?: Fill | Fill[];
-  strokes?: Stroke | Stroke[];
   stroke?: Stroke | Stroke[];
-  effects?: Effect | Effect[];
   effect?: Effect | Effect[];
   theme?: Theme;
   reusable?: boolean;

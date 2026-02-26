@@ -74,7 +74,11 @@ Gotcha:
 | Property | Type | Description |
 |------|------|------|
 | `clip` | boolean | Clips content outside the frame bounds when `true`. Default is false |
-| `enabled` | boolean | Hides the node when `false` (applies to all entities) |
+
+### General entity properties (all node types)
+| Property | Type | Description |
+|------|------|------|
+| `enabled` | boolean | Hides the node when `false` (applies to all entities, not frame-specific) |
 
 ```json
 [

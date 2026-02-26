@@ -23,6 +23,32 @@ const matchObj = parseJsonOrFail(args.match, '--match JSON');
 const replaceObj = parseJsonOrFail(args.replace, '--replace JSON');
 const pen = loadPen(file);
 
+function normalizeAliasesInNode(value) {
+  if (!value || typeof value !== 'object') return value;
+
+  if (!Array.isArray(value)) {
+    const aliases = [
+      ['fills', 'fill'],
+      ['strokes', 'stroke'],
+      ['effects', 'effect'],
+    ];
+    for (const [plural, singular] of aliases) {
+      if (plural in value) {
+        if (!(singular in value)) value[singular] = value[plural];
+        delete value[plural];
+      }
+    }
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) normalizeAliasesInNode(item);
+    return value;
+  }
+
+  for (const child of Object.values(value)) normalizeAliasesInNode(child);
+  return value;
+}
+
 const parentIds = args['parent-ids'] ? String(args['parent-ids']).split(',').map((s) => s.trim()).filter(Boolean) : null;
 
 function matches(node, pattern) {
@@ -62,7 +88,7 @@ if (args['dry-run']) {
 
 backupPen(file);
 for (const t of targets) {
-  Object.assign(t.node, deepMerge(t.node, replaceObj));
+  Object.assign(t.node, normalizeAliasesInNode(deepMerge(t.node, replaceObj)));
 }
 savePen(file, pen);
 process.stdout.write(`OK: replaced ${targets.length} node(s)\n`);

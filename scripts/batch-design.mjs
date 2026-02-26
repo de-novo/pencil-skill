@@ -39,7 +39,33 @@ backupPen(file);
 let changed = 0;
 const ids = collectIds(pen);
 
+function normalizeAliasesInNode(value) {
+  if (!value || typeof value !== 'object') return value;
 
+  if (!Array.isArray(value)) {
+    const aliases = [
+      ['fills', 'fill'],
+      ['strokes', 'stroke'],
+      ['effects', 'effect'],
+    ];
+    for (const [plural, singular] of aliases) {
+      if (plural in value) {
+        if (!(singular in value)) value[singular] = value[plural];
+        delete value[plural];
+      }
+    }
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) normalizeAliasesInNode(item);
+    return value;
+  }
+
+  for (const child of Object.values(value)) {
+    normalizeAliasesInNode(child);
+  }
+  return value;
+}
 
 function isDescendantNode(candidate, ancestorId) {
   if (!candidate || !Array.isArray(candidate.children)) return false;
@@ -70,6 +96,7 @@ for (let i = 0; i < ops.length; i += 1) {
       if (!op.node.id) throw new Error('insert.node.id is required');
       if (ids.has(op.node.id)) throw new Error(`Duplicate id: ${op.node.id}`);
 
+      normalizeAliasesInNode(op.node);
       const idx = normalizeIndex(op.index, parent.node.children.length);
       parent.node.children.splice(idx, 0, op.node);
       ids.add(op.node.id);
@@ -82,7 +109,7 @@ for (let i = 0; i < ops.length; i += 1) {
         throw new Error(`Cannot change id to duplicate: ${op.props.id}`);
       }
       const oldId = found.node.id;
-      const merged = deepMerge(found.node, op.props);
+      const merged = normalizeAliasesInNode(deepMerge(found.node, op.props));
       found.parent.children[found.parent.children.findIndex((c) => c.id === oldId)] = merged;
       if (merged.id !== oldId) {
         ids.delete(oldId);
