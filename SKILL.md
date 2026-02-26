@@ -317,6 +317,7 @@ node scripts/set-variables.mjs file.pen --var 'space.md=number:12'
 ```
 
 **Notes:**
+- `toParentId` is optional. If omitted, the copied node is inserted at the root level.
 - During copy, all internal child ids must remain unique → using a `newId` prefix is recommended
 - Do not send too many ops at once (25 or fewer recommended)
 - Backup is automatically created (`.pen.bak`)

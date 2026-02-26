@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { join, basename } from 'node:path';
+import { join, basename, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 if (process.argv.includes('--help')) {
   console.log('Usage: node scripts/compile-agents.mjs');
@@ -9,7 +10,8 @@ if (process.argv.includes('--help')) {
   process.exit(0);
 }
 
-const rootDir = join(import.meta.dirname, '..');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const rootDir = join(__dirname, '..');
 const rulesDir = join(rootDir, 'rules');
 const outFile = join(rootDir, 'AGENTS.md');
 
