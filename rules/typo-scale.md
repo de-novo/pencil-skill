@@ -11,7 +11,7 @@ Define type scale with at least 6 steps (xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5x
 
 **Incorrect (Why it's bad):**
 
-- Apply after running CLI(set-variables)
+- Apply after running `node scripts/set-variables.mjs <file.pen> --var '<name>=<type>:<value>'`
 
 ```json
 {
@@ -38,7 +38,7 @@ Define type scale with at least 6 steps (xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5x
 
 **Correct (Why it's good):**
 
-- 9-step scale based on Major Third ratio (×1.25) (apply after running CLI(set-variables))
+- 9-step scale based on Major Third ratio (×1.25) (apply after running `node scripts/set-variables.mjs <file.pen> --var '<name>=<type>:<value>'`)
 
 ```json
 {

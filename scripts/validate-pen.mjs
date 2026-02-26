@@ -55,7 +55,7 @@ function walk(node, p='root', parent=null) {
 
   for (const [plural, singular] of [['fills', 'fill'], ['strokes', 'stroke'], ['effects', 'effect']]) {
     if (plural in node) {
-      warn(`${p} uses non-canonical property "${plural}"; use "${singular}"`);
+      warn(`${p} uses plural alias "${plural}" (scripts auto-normalize to "${singular}")`);
     }
   }
 
