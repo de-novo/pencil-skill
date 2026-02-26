@@ -28,20 +28,16 @@ export type StringOrVariable = string | VariableRef;
 export type BooleanOrVariable = boolean | VariableRef;
 export type ColorOrVariable = ColorHex | VariableRef;
 
-export type ThemeValue<T> = Array<{
+export interface ThemedValue<T> {
   value: T;
   theme?: Theme;
-}>;
-
-export interface PenVariable {
-  type: 'boolean' | 'color' | 'number' | 'string';
-  value:
-    | BooleanOrVariable
-    | ColorOrVariable
-    | NumberOrVariable
-    | StringOrVariable
-    | ThemeValue<BooleanOrVariable | ColorOrVariable | NumberOrVariable | StringOrVariable>;
 }
+
+export type PenVariable =
+  | { type: 'boolean'; value: BooleanOrVariable | ThemedValue<BooleanOrVariable>[] }
+  | { type: 'color'; value: ColorOrVariable | ThemedValue<ColorOrVariable>[] }
+  | { type: 'number'; value: NumberOrVariable | ThemedValue<NumberOrVariable>[] }
+  | { type: 'string'; value: StringOrVariable | ThemedValue<StringOrVariable>[] };
 
 export type ColorHex = `#${string}`;
 
