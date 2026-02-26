@@ -210,12 +210,12 @@ For logos, images, and icons:
 - [ ] Check theme axis/value consistency when needed
 
 ## Property Aliases
-Both singular and plural forms are accepted for these properties:
-- `fill` / `fills` — node fill(s)
-- `stroke` / `strokes` — node stroke(s)
-- `effect` / `effects` — node effect(s)
+Canonical schema properties are singular:
+- `fill` (schema property; value can be single fill or array)
+- `stroke` (schema property; value can be single stroke or array)
+- `effect` (schema property; value can be single effect or array)
 
-Use singular for single values, plural for arrays. Both forms are valid in the schema.
+Plural keys (`fills`, `strokes`, `effects`) are convenience aliases accepted by scripts and normalized to singular forms. They are not canonical schema property names.
 
 ## AGENTS.md (Agent Guide)
 `AGENTS.md` is a concise guide with rule summaries and references to individual `rules/*.md` files for full details. To regenerate after editing rules: `node scripts/compile-agents.mjs`

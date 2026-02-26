@@ -16,6 +16,7 @@ function warn(msg){ console.log(`⚠️ ${msg}`); }
 const data = loadPen(file);
 
 if (!data.version) fail('missing top-level key: version');
+if (data.version !== '2.8') fail(`version must be "2.8", got "${data.version}"`);
 if (!Array.isArray(data.children)) fail('top-level children must be array');
 
 const idMap = new Map();

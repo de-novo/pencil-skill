@@ -152,9 +152,7 @@ export interface PenNode extends LayoutProps {
   width?: number | NumberOrVariable | 'fit_content' | 'fill_container' | `${'fit_content' | 'fill_container'}(${number})`;
   height?: number | NumberOrVariable | 'fit_content' | 'fill_container' | `${'fit_content' | 'fill_container'}(${number})`;
   opacity?: NumberOrVariable;
-  visible?: boolean;
   enabled?: BooleanOrVariable;
-  locked?: boolean;
   rotation?: NumberOrVariable;
   flipX?: BooleanOrVariable;
   flipY?: BooleanOrVariable;
