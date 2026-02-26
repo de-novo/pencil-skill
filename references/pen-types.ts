@@ -1,7 +1,9 @@
 // TypeScript definitions for .pen format (derived from pen-schema.json)
 
-// Note: Schema _PRIVATE types (e.g. `connection`) and top-level _PRIVATE keys (`fonts`, `imports`)
-// are intentionally excluded from this public authoring node union.
+// Note: Schema _PRIVATE node types (e.g. `connection`) are intentionally excluded from the
+// public authoring node union (`PenNodeType`). Top-level _PRIVATE keys (`fonts`, `imports`)
+// are kept as optional fields on `PenDocument` for schema completeness, but agents should
+// treat them as Pencil-internal metadata and avoid authoring them directly.
 export type PenNodeType =
   | 'rectangle'
   | 'ellipse'

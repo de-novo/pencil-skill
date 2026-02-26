@@ -142,9 +142,10 @@ for (let i = 0; i < ops.length; i += 1) {
       if (!found) throw new Error(`Node not found: ${op.id}`);
       if (!op.newId) throw new Error('copy.newId is required');
       if (ids.has(op.newId)) throw new Error(`Duplicate id: ${op.newId}`);
-      const target = op.toParentId === 'root' ? { node: pen } : findNodeById(pen, op.toParentId);
-      if (!target) throw new Error(`Target parent not found: ${op.toParentId}`);
-      ensureChildrenArray(target.node, `target parent ${op.toParentId}`);
+      const targetParentId = op.toParentId ?? 'root';
+      const target = targetParentId === 'root' ? { node: pen } : findNodeById(pen, targetParentId);
+      if (!target) throw new Error(`Target parent not found: ${targetParentId}`);
+      ensureChildrenArray(target.node, `target parent ${targetParentId}`);
 
       const copied = clone(found.node);
       const oldRootId = copied.id;

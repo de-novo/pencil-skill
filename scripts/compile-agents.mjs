@@ -267,7 +267,7 @@ const doc = [
   '| `update` | `op`, `id`, `props` | Deep-merge patch into existing node. |',
   '| `delete` | `op`, `id` | Remove node and descendants. |',
   '| `move` | `op`, `id`, `toParentId` | Move node to another parent (`index` optional). |',
-  '| `copy` | `op`, `id`, `newId` | Duplicate node tree; ensure IDs remain unique. |',
+  '| `copy` | `op`, `id`, `newId` | Duplicate node tree; ensure IDs remain unique. `toParentId` optional (defaults to `root`). |',
   '',
   '## Validation Checklist',
   '',
