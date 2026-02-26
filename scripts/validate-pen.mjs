@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadPen, parseArgs, printHelpAndExit, fail } from './_utils.mjs';
 
-const HELP = `Usage: node scripts/validate-pen.mjs <file.pen>\n\nValidates a .pen file for structural correctness, ID uniqueness,\nvariable references, node types, and design best practices.`;
+const HELP = `Usage: node scripts/validate-pen.mjs <file.pen>\n\nValidates a .pen file for structural correctness, value-type checks, ID uniqueness,\nvariable references, node types, and design best practices.`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];
@@ -15,6 +15,33 @@ const ALLOWED = new Set([
 const PRIVATE_TYPES = new Set(['connection']);
 
 function warn(msg){ console.log(`⚠️ ${msg}`); }
+
+function describeType(value) {
+  if (Array.isArray(value)) return 'array';
+  if (value === null) return 'null';
+  return typeof value;
+}
+
+function isObject(value) {
+  return value && typeof value === 'object' && !Array.isArray(value);
+}
+
+function isObjectOrObjectArray(value) {
+  if (isObject(value)) return true;
+  return Array.isArray(value) && value.every(isObject);
+}
+
+function isVariableBindingString(value) {
+  return typeof value === 'string' && value.startsWith('$');
+}
+
+function isObjectOrObjectArrayOrVariable(value) {
+  return isObjectOrObjectArray(value) || isVariableBindingString(value);
+}
+
+function nodeLabel(node) {
+  return typeof node?.id === 'string' && node.id.trim() ? node.id : '(unknown)';
+}
 
 const data = loadPen(file);
 
@@ -81,6 +108,37 @@ function walk(node, p='root', parent=null) {
     const hasTextGrowth = typeof node.textGrowth === 'string';
     if (!hasTextGrowth && ('width' in node || 'height' in node)) {
       warn(`${p} text uses width/height without textGrowth (may be ignored)`);
+    }
+  }
+
+  for (const prop of ['fill', 'stroke', 'effect']) {
+    if (prop in node && !isObjectOrObjectArrayOrVariable(node[prop])) {
+      warn(`node "${nodeLabel(node)}" has invalid ${prop} value (expected object or array, got ${describeType(node[prop])})`);
+    }
+  }
+
+  for (const prop of ['width', 'height']) {
+    if (prop in node) {
+      const value = node[prop];
+      if (!(typeof value === 'number' || typeof value === 'string')) {
+        warn(`node "${nodeLabel(node)}" has invalid ${prop} value (expected number or string, got ${describeType(value)})`);
+      }
+    }
+  }
+
+  if ('opacity' in node) {
+    const value = node.opacity;
+    const validOpacity = (typeof value === 'number' && value >= 0 && value <= 1) || isVariableBindingString(value);
+    if (!validOpacity) {
+      warn(`node "${nodeLabel(node)}" has invalid opacity value (expected number 0..1 or variable binding string, got ${describeType(value)})`);
+    }
+  }
+
+  if ('rotation' in node) {
+    const value = node.rotation;
+    const validRotation = typeof value === 'number' || isVariableBindingString(value);
+    if (!validRotation) {
+      warn(`node "${nodeLabel(node)}" has invalid rotation value (expected number or variable binding string, got ${describeType(value)})`);
     }
   }
 

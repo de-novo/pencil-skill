@@ -257,7 +257,7 @@ node scripts/set-variables.mjs file.pen --var 'space.md=number:12'
 ### Validation Tool
 | Script | Purpose | Usage |
 |--------|------|--------|
-| `validate-pen.mjs` | Structural validation + lint | `node scripts/validate-pen.mjs file.pen` |
+| `validate-pen.mjs` | Structural validation + value-type checks + lint | `node scripts/validate-pen.mjs file.pen` |
 
 ### batch-design Operations
 
