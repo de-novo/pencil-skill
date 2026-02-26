@@ -35,7 +35,7 @@ node scripts/find-space.mjs mydesign.pen --width 200 --height 100
 ## What's Inside
 
 - **SKILL.md** — Complete skill instructions and workflow for AI agents
-- **scripts/** — 9 CLI tools for .pen file manipulation
+- **scripts/** — 8 CLI tools for .pen file manipulation + 1 utility for AGENTS.md generation (`compile-agents.mjs`)
 - **rules/** — 41 design rules for production-quality UI output
 - **references/** — Schema (JSON + TypeScript), Tailwind mappings, component patterns
 - **assets/** — Example `.pen` files (card component, Reddit UI clone)

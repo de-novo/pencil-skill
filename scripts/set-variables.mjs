@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadPen, savePen, backupPen, parseArgs, printHelpAndExit, fail } from './_utils.mjs';
 
-const HELP = `Usage: node scripts/set-variables.mjs <file.pen> --var '<name>=<type>:<value>' [--theme '<axis>=<values>']\n\n@theme syntax in --var values:\n  --var 'color.bg=color:#FFFFFF@light,#0F172A@dark'`;
+const HELP = `Usage: node scripts/set-variables.mjs <file.pen> --var '<name>=<type>:<value>' [--theme '<axis>=<values>']\n\n@theme syntax in --var values:\n  --var 'color.bg=color:#FFFFFF@light,#0F172A@dark'\n\nWhen a @theme value label exists in multiple theme axes, the first matching axis is used.\nA warning is printed. Use explicit --theme to disambiguate axes.`;
 const args = parseArgs(process.argv.slice(2));
 if (args.help) printHelpAndExit(HELP);
 const file = args._[0];
@@ -56,7 +56,11 @@ for (const vexpr of vars) {
       const themeValue = seg.slice(at + 1);
 
       const axes = Object.keys(pen.themes || {});
-      const axis = axes.find((a) => (pen.themes[a] || []).includes(themeValue)) || (axes[0] || 'mode');
+      const matchedAxes = axes.filter((a) => (pen.themes[a] || []).includes(themeValue));
+      let axis = matchedAxes[0] || axes[0] || 'mode';
+      if (matchedAxes.length > 1) {
+        process.stdout.write(`⚠ ambiguous theme value "${themeValue}" matches axes [${matchedAxes.join(', ')}] — using first match "${axis}". Use explicit --theme to disambiguate.\n`);
+      }
       return { theme: { [axis]: themeValue }, value };
     });
 

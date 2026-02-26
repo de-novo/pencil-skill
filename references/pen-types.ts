@@ -4,6 +4,8 @@
 // public authoring node union (`PenNodeType`). Top-level _PRIVATE keys (`fonts`, `imports`)
 // are kept as optional fields on `PenDocument` for schema completeness, but agents should
 // treat them as Pencil-internal metadata and avoid authoring them directly.
+export const PEN_SCHEMA_VERSION = '2.8' as const;
+
 export type PenNodeType =
   | 'rectangle'
   | 'ellipse'
@@ -226,7 +228,7 @@ export type BlendMode =
   | 'luminosity';
 
 export interface PenDocument {
-  version: '2.8';
+  version: typeof PEN_SCHEMA_VERSION;
   themes?: Record<string, string[]>;
   variables?: Record<string, PenVariable>;
   children: PenNode[];
