@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { loadPen, parseArgs, printHelpAndExit, fail } from './_utils.mjs';
+const { loadPen, parseArgs, printHelpAndExit, fail } = await import(new URL('./_utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/validate-pen.mjs <file.pen>\n\nValidates a .pen file for structural correctness, value-type checks, ID uniqueness,\nvariable references, node types, and design best practices.`;
 const args = parseArgs(process.argv.slice(2));

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import {
-  loadPen,
+const {
+loadPen,
   savePen,
   backupPen,
   parseArgs,
@@ -10,7 +10,7 @@ import {
   walkNodes,
   deepMerge,
   findNodeById,
-} from './_utils.mjs';
+} = await import(new URL('./_utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/replace-props.mjs <file.pen> --match '<JSON>' --replace '<JSON>' [--parent-ids <id1,id2>] [--dry-run]`;
 const args = parseArgs(process.argv.slice(2));

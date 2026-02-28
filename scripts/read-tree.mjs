@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { loadPen, parseArgs, printHelpAndExit, fail, findNodeById } from './_utils.mjs';
+const { loadPen, parseArgs, printHelpAndExit, fail, findNodeById } = await import(new URL('./_utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/read-tree.mjs <file.pen> [--id <nodeId>] [--depth <n>] [--types-only]\n\nPrint node tree in indented format.`;
 

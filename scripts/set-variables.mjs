@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { loadPen, savePen, backupPen, parseArgs, printHelpAndExit, fail } from './_utils.mjs';
+const { loadPen, savePen, backupPen, parseArgs, printHelpAndExit, fail } = await import(new URL('./_utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/set-variables.mjs <file.pen> --var '<name>=<type>:<value>' [--theme '<axis>=<values>']\n\n@theme syntax in --var values:\n  --var 'color.bg=color:#FFFFFF@light,#0F172A@dark'\n\nWhen a @theme value label exists in multiple theme axes, the first matching axis is used.\nA warning is printed. Use explicit --theme to disambiguate axes.`;
 const args = parseArgs(process.argv.slice(2));
