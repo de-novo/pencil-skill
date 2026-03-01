@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { loadPen, parseArgs, printHelpAndExit, fail, walkNodes } = await import(new URL('./_utils.mjs', import.meta.url));
+const { loadPen, parseArgs, printHelpAndExit, fail, walkNodes } = await import(new URL('./utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/search-nodes.mjs <file.pen> [--type <type>] [--name <regex>] [--prop <key=value>] [--reusable] [--depth <n>]`;
 const args = parseArgs(process.argv.slice(2));

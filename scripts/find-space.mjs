@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { loadPen, parseArgs, printHelpAndExit, fail, findNodeById, toNumberOrFail } = await import(new URL('./_utils.mjs', import.meta.url));
+const { loadPen, parseArgs, printHelpAndExit, fail, findNodeById, toNumberOrFail } = await import(new URL('./utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/find-space.mjs <file.pen> --width <n> --height <n> [--direction right|below|left|above] [--near <nodeId>] [--padding <n>]`;
 const args = parseArgs(process.argv.slice(2));

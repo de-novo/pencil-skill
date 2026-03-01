@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { loadPen, parseArgs, printHelpAndExit } = await import(new URL('./_utils.mjs', import.meta.url));
+const { loadPen, parseArgs, printHelpAndExit } = await import(new URL('./utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/get-variables.mjs <file.pen> [--format table|json]`;
 const args = parseArgs(process.argv.slice(2));

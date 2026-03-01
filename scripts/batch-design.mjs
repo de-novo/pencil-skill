@@ -14,7 +14,7 @@ loadPen,
   ensureChildrenArray,
   deepMerge,
   clone,
-} = await import(new URL('./_utils.mjs', import.meta.url));
+} = await import(new URL('./utils.mjs', import.meta.url));
 
 const HELP = `Usage: node scripts/batch-design.mjs <file.pen> --ops '<JSON operations>'\n   or: node scripts/batch-design.mjs <file.pen> --ops-file <ops.json>`;
 const args = parseArgs(process.argv.slice(2));
